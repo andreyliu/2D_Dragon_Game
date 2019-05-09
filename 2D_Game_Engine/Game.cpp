@@ -61,7 +61,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
     
     player.addComponent<TransformComponent>(2);
-    player.addComponent<SpriteComponent>("/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/dragon.png");
+    player.addComponent<SpriteComponent>("/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/dragon.png", 3, 300);
     
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
