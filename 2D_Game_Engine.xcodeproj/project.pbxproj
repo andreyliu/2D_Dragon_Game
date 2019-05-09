@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B0DC7722284D21100F7DBC4 /* ECS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DC7712284D21100F7DBC4 /* ECS.cpp */; };
 		7B86DEE72283585900D96980 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B86DEE62283585900D96980 /* main.cpp */; };
 		7B86DEF2228358C800D96980 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B86DEF0228358C800D96980 /* Game.cpp */; };
 		7B86DEFA22836D0500D96980 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B86DEF722836B2000D96980 /* libSDL2-2.0.0.dylib */; };
@@ -32,6 +33,11 @@
 
 /* Begin PBXFileReference section */
 		7B0DC76C2284A78700F7DBC4 /* TileComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TileComponent.h; sourceTree = "<group>"; };
+		7B0DC76D2284C83D00F7DBC4 /* water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = water.png; sourceTree = "<group>"; };
+		7B0DC76E2284C83D00F7DBC4 /* p16x16.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = p16x16.map; sourceTree = "<group>"; };
+		7B0DC76F2284C83D00F7DBC4 /* grass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grass.png; sourceTree = "<group>"; };
+		7B0DC7702284C83D00F7DBC4 /* dirt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dirt.png; sourceTree = "<group>"; };
+		7B0DC7712284D21100F7DBC4 /* ECS.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ECS.cpp; sourceTree = "<group>"; };
 		7B86DEE32283585900D96980 /* 2D_Game_Engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 2D_Game_Engine; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B86DEE62283585900D96980 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		7B86DEEE2283587800D96980 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
@@ -132,6 +138,10 @@
 		7B86DEF42283659400D96980 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				7B0DC7702284C83D00F7DBC4 /* dirt.png */,
+				7B0DC76F2284C83D00F7DBC4 /* grass.png */,
+				7B0DC76E2284C83D00F7DBC4 /* p16x16.map */,
+				7B0DC76D2284C83D00F7DBC4 /* water.png */,
 				7B86DF042283978500D96980 /* dragon1.png */,
 				7B86DEFD228372CE00D96980 /* dragon.png */,
 			);
@@ -142,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				7B86DF082283A45800D96980 /* ECS.h */,
+				7B0DC7712284D21100F7DBC4 /* ECS.cpp */,
 				7B86DF092283ACFB00D96980 /* Components.h */,
 				7B86DF0B2283B70700D96980 /* TransformComponent.h */,
 				7B86DF102283D6FA00D96980 /* KeyboardController.h */,
@@ -211,6 +222,7 @@
 				7B86DF142283DFF300D96980 /* Collision.cpp in Sources */,
 				7B86DF0322837E2300D96980 /* GameObject.cpp in Sources */,
 				7B86DF0722839BCC00D96980 /* Map.cpp in Sources */,
+				7B0DC7722284D21100F7DBC4 /* ECS.cpp in Sources */,
 				7B86DF0F2283C7DB00D96980 /* Vector2D.cpp in Sources */,
 				7B86DEE72283585900D96980 /* main.cpp in Sources */,
 				7B86DEF2228358C800D96980 /* Game.cpp in Sources */,
