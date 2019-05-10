@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7B0DC7722284D21100F7DBC4 /* ECS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DC7712284D21100F7DBC4 /* ECS.cpp */; };
+		7B0DC7792285795F00F7DBC4 /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DC7782285795F00F7DBC4 /* AssetManager.cpp */; };
+		7B0DC7812285FD6200F7DBC4 /* libSDL2_ttf-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B0DC7802285FD6200F7DBC4 /* libSDL2_ttf-2.0.0.dylib */; };
 		7B86DEE72283585900D96980 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B86DEE62283585900D96980 /* main.cpp */; };
 		7B86DEF2228358C800D96980 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B86DEF0228358C800D96980 /* Game.cpp */; };
 		7B86DEFA22836D0500D96980 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B86DEF722836B2000D96980 /* libSDL2-2.0.0.dylib */; };
@@ -42,6 +44,14 @@
 		7B0DC7742284EA9400F7DBC4 /* map.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = map.map; sourceTree = "<group>"; };
 		7B0DC7752284EA9400F7DBC4 /* terrain_ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = terrain_ss.png; sourceTree = "<group>"; };
 		7B0DC7762285525A00F7DBC4 /* ColTex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ColTex.png; sourceTree = "<group>"; };
+		7B0DC7772285788800F7DBC4 /* AssetManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetManager.h; sourceTree = "<group>"; };
+		7B0DC7782285795F00F7DBC4 /* AssetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
+		7B0DC77A2285DD6100F7DBC4 /* ProjectileComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectileComponent.h; sourceTree = "<group>"; };
+		7B0DC77B2285E77A00F7DBC4 /* proj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = proj.png; sourceTree = "<group>"; };
+		7B0DC77C2285F3D400F7DBC4 /* libSDL_ttf-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL_ttf-2.0.0.dylib"; path = "../../../../../usr/local/Cellar/sdl_ttf/2.0.11_1/lib/libSDL_ttf-2.0.0.dylib"; sourceTree = "<group>"; };
+		7B0DC77E2285F43100F7DBC4 /* arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = arial.ttf; sourceTree = "<group>"; };
+		7B0DC77F2285F59B00F7DBC4 /* UILabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UILabel.h; sourceTree = "<group>"; };
+		7B0DC7802285FD6200F7DBC4 /* libSDL2_ttf-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_ttf-2.0.0.dylib"; path = "../../../../../usr/local/Cellar/sdl2_ttf/2.0.14/lib/libSDL2_ttf-2.0.0.dylib"; sourceTree = "<group>"; };
 		7B86DEE32283585900D96980 /* 2D_Game_Engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 2D_Game_Engine; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B86DEE62283585900D96980 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		7B86DEEE2283587800D96980 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
@@ -74,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B0DC7812285FD6200F7DBC4 /* libSDL2_ttf-2.0.0.dylib in Frameworks */,
 				7B86DEFB22836D1300D96980 /* libSDL2_image-2.0.0.dylib in Frameworks */,
 				7B86DEFA22836D0500D96980 /* libSDL2-2.0.0.dylib in Frameworks */,
 			);
@@ -118,6 +129,8 @@
 				7B86DF0E2283C7DB00D96980 /* Vector2D.cpp */,
 				7B86DEFF22837BAC00D96980 /* TextureManager.cpp */,
 				7B86DEFE22837B3A00D96980 /* TextureManager.h */,
+				7B0DC7772285788800F7DBC4 /* AssetManager.h */,
+				7B0DC7782285795F00F7DBC4 /* AssetManager.cpp */,
 			);
 			path = 2D_Game_Engine;
 			sourceTree = "<group>";
@@ -125,6 +138,8 @@
 		7B86DEED2283587800D96980 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7B0DC7802285FD6200F7DBC4 /* libSDL2_ttf-2.0.0.dylib */,
+				7B0DC77C2285F3D400F7DBC4 /* libSDL_ttf-2.0.0.dylib */,
 				7B86DEF722836B2000D96980 /* libSDL2-2.0.0.dylib */,
 				7B86DEF5228368E300D96980 /* libSDL2_image-2.0.0.dylib */,
 				7B86DEEE2283587800D96980 /* SDL2.framework */,
@@ -144,8 +159,10 @@
 			children = (
 				7B0DC7762285525A00F7DBC4 /* ColTex.png */,
 				7B0DC7742284EA9400F7DBC4 /* map.map */,
+				7B0DC77E2285F43100F7DBC4 /* arial.ttf */,
 				7B0DC7752284EA9400F7DBC4 /* terrain_ss.png */,
 				7B0DC7702284C83D00F7DBC4 /* dirt.png */,
+				7B0DC77B2285E77A00F7DBC4 /* proj.png */,
 				7B0DC76F2284C83D00F7DBC4 /* grass.png */,
 				7B0DC76E2284C83D00F7DBC4 /* p16x16.map */,
 				7B0DC76D2284C83D00F7DBC4 /* water.png */,
@@ -164,9 +181,11 @@
 				7B86DF092283ACFB00D96980 /* Components.h */,
 				7B86DF0B2283B70700D96980 /* TransformComponent.h */,
 				7B86DF102283D6FA00D96980 /* KeyboardController.h */,
+				7B0DC77A2285DD6100F7DBC4 /* ProjectileComponent.h */,
 				7B86DF112283DA7500D96980 /* ColliderComponent.h */,
 				7B86DF0A2283B68600D96980 /* SpriteComponent.h */,
 				7B0DC76C2284A78700F7DBC4 /* TileComponent.h */,
+				7B0DC77F2285F59B00F7DBC4 /* UILabel.h */,
 			);
 			path = ECS;
 			sourceTree = "<group>";
@@ -233,6 +252,7 @@
 				7B0DC7722284D21100F7DBC4 /* ECS.cpp in Sources */,
 				7B86DF0F2283C7DB00D96980 /* Vector2D.cpp in Sources */,
 				7B86DEE72283585900D96980 /* main.cpp in Sources */,
+				7B0DC7792285795F00F7DBC4 /* AssetManager.cpp in Sources */,
 				7B86DEF2228358C800D96980 /* Game.cpp in Sources */,
 				7B86DF0022837BAC00D96980 /* TextureManager.cpp in Sources */,
 			);
@@ -366,6 +386,8 @@
 					"$(inherited)",
 					/usr/local/Cellar/sdl2_image/2.0.4/lib,
 					/usr/local/Cellar/sdl2/2.0.9_1/lib,
+					/usr/local/Cellar/sdl_ttf/2.0.11_1/lib,
+					/usr/local/Cellar/sdl2_ttf/2.0.14/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -386,6 +408,8 @@
 					"$(inherited)",
 					/usr/local/Cellar/sdl2_image/2.0.4/lib,
 					/usr/local/Cellar/sdl2/2.0.9_1/lib,
+					/usr/local/Cellar/sdl_ttf/2.0.11_1/lib,
+					/usr/local/Cellar/sdl2_ttf/2.0.14/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

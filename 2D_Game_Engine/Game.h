@@ -5,6 +5,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+class AssetManager;
 class ColliderComponent;
 
 class Game {
@@ -20,12 +21,20 @@ public:
     void clean();
     bool running() { return isRunning; }
     
-    static void AddTile(int srcX, int srcY, int xpos, int ypos);
     static SDL_Renderer *renderer;
     static SDL_Event event;
-    static std::vector<ColliderComponent *> colliders;
     static bool isRunning;
     static SDL_Rect camera;
+    static AssetManager *assets;
+    
+    enum groupLabels : std::size_t
+    {
+        groupMap,
+        groupPlayers,
+        groupEnemies,
+        groupColliders,
+        groupProjectiles
+    };
     
 private:
     SDL_Window *window;

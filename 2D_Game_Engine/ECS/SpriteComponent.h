@@ -4,6 +4,7 @@
 #include "../TextureManager.h"
 #include "Animation.h"
 #include <map>
+#include "../AssetManager.h"
 
 class SpriteComponent : public Component
 {
@@ -25,38 +26,38 @@ public:
     SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
     
     SpriteComponent() = default;
-    SpriteComponent(const char *path)
+    SpriteComponent(std::string ID)
     {
-        setTex(path);
+        setTex(ID);
     }
     
-    SpriteComponent(const char *path, bool isAnimated)
+    SpriteComponent(std::string ID, bool isAnimated)
     {
         animated = isAnimated;
+        if (isAnimated)
+        {
+            Animation up = Animation(0, 3, 300);
+            Animation right = Animation(1, 3, 300);
+            Animation down = Animation(2, 3, 300);
+            Animation left = Animation(3, 3, 300);
+            
+            animations.emplace("Up", up);
+            animations.emplace("Right", right);
+            animations.emplace("Down", down);
+            animations.emplace("Left", left);
+            
+            Play("Down");
+        }
         
-        Animation up = Animation(0, 3, 300);
-        Animation right = Animation(1, 3, 300);
-        Animation down = Animation(2, 3, 300);
-        Animation left = Animation(3, 3, 300);
-        
-        animations.emplace("Up", up);
-        animations.emplace("Right", right);
-        animations.emplace("Down", down);
-        animations.emplace("Left", left);
-        
-        Play("Down");
-        
-        setTex(path);
+        setTex(ID);
     }
     
     ~SpriteComponent()
-    {
-        SDL_DestroyTexture(texture);
-    }
+    {}
     
-    void setTex(const char *path)
+    void setTex(std::string ID)
     {
-        texture = TextureManager::LoadTexture(path);
+        texture = Game::assets->GetTexture(ID);
     }
     
     void init() override

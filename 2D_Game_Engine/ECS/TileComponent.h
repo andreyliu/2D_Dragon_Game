@@ -2,6 +2,9 @@
 
 #include "ECS.h"
 #include <SDL2/SDL.h>
+#include "../Game.h"
+#include "../TextureManager.h"
+#include "../Vector2D.h"
 
 class TileComponent : public Component
 {
@@ -13,20 +16,16 @@ public:
     
     TileComponent() = default;
     
-    TileComponent(int srcX, int srcY, int xpos, int ypos, const char *path)
+    TileComponent(int srcX, int srcY, int xpos, int ypos, int tsize, int tscale, std::string ID)
     {
-        texture = TextureManager::LoadTexture(path);
-        
-        position.x = xpos;
-        position.y = ypos;
+        texture = Game::assets->GetTexture(ID);
         
         srcRect.x = srcX;
         srcRect.y = srcY;
-        srcRect.w = srcRect.h = 32;
-        
-        destRect.x = xpos;
-        destRect.y = ypos;
-        destRect.w = destRect.h = 64;
+        srcRect.w = srcRect.h = tsize;
+        position.x = static_cast<float>(xpos);
+        position.y = static_cast<float>(ypos);
+        destRect.w = destRect.h = tsize * tscale;
     }
     ~TileComponent()
     {
@@ -35,8 +34,8 @@ public:
     
     void update() override
     {
-        destRect.x = position.x - Game::camera.x;
-        destRect.y = position.y - Game::camera.y;
+        destRect.x = static_cast<int>(position.x - Game::camera.x);
+        destRect.y = static_cast<int>(position.y - Game::camera.y);
     }
     
     void draw() override
