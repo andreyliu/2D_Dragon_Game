@@ -41,6 +41,7 @@
 		7B0DC7732284DB1800F7DBC4 /* Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		7B0DC7742284EA9400F7DBC4 /* map.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = map.map; sourceTree = "<group>"; };
 		7B0DC7752284EA9400F7DBC4 /* terrain_ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = terrain_ss.png; sourceTree = "<group>"; };
+		7B0DC7762285525A00F7DBC4 /* ColTex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ColTex.png; sourceTree = "<group>"; };
 		7B86DEE32283585900D96980 /* 2D_Game_Engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 2D_Game_Engine; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B86DEE62283585900D96980 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		7B86DEEE2283587800D96980 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
@@ -141,6 +142,7 @@
 		7B86DEF42283659400D96980 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				7B0DC7762285525A00F7DBC4 /* ColTex.png */,
 				7B0DC7742284EA9400F7DBC4 /* map.map */,
 				7B0DC7752284EA9400F7DBC4 /* terrain_ss.png */,
 				7B0DC7702284C83D00F7DBC4 /* dirt.png */,

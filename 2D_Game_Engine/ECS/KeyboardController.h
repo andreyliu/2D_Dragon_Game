@@ -28,7 +28,6 @@ public:
                 case SDLK_a:
                     transform->velocity.x = -1;
                     sprite->Play("Left");
-//                    sprite->spriteFlip = SDL_FLIP_HORIZONTAL;
                     break;
                 case SDLK_d:
                     transform->velocity.x = 1;
