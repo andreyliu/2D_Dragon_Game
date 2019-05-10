@@ -2,6 +2,8 @@
 #include "Components.h"
 #include "SDL2/SDL.h"
 #include "../TextureManager.h"
+#include "Animation.h"
+#include <map>
 
 class SpriteComponent : public Component
 {
@@ -15,18 +17,36 @@ private:
     int speed = 100;
     
 public:
+    
+    int animIndex = 0;
+    
+    std::map<const char *, Animation> animations;
+    
+    SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
+    
     SpriteComponent() = default;
     SpriteComponent(const char *path)
     {
         setTex(path);
     }
     
-    SpriteComponent(const char *path, int nFrames, int mSpeed)
+    SpriteComponent(const char *path, bool isAnimated)
     {
+        animated = isAnimated;
+        
+        Animation up = Animation(0, 3, 300);
+        Animation right = Animation(1, 3, 300);
+        Animation down = Animation(2, 3, 300);
+        Animation left = Animation(3, 3, 300);
+        
+        animations.emplace("Up", up);
+        animations.emplace("Right", right);
+        animations.emplace("Down", down);
+        animations.emplace("Left", left);
+        
+        Play("Down");
+        
         setTex(path);
-        frames = nFrames;
-        speed = mSpeed;
-        animated = true;
     }
     
     ~SpriteComponent()
@@ -56,15 +76,25 @@ public:
         {
             srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
         }
+        
+        srcRect.y = animIndex * transform->height;
+        
         destRect.x = static_cast<int>(transform->position.x);
         destRect.y = static_cast<int>(transform->position.y);
-        destRect.w = transform->width * transform->scale;
-        destRect.h = transform->height * transform->scale;
+        destRect.w = static_cast<int>(transform->width * transform->scale);
+        destRect.h = static_cast<int>(transform->height * transform->scale);
     }
     
     void draw() override
     {
-        TextureManager::Draw(texture, srcRect, destRect);
+        TextureManager::Draw(texture, srcRect, destRect, spriteFlip);
+    }
+    
+    void Play(const char *animName)
+    {
+        frames = animations[animName].frames;
+        animIndex = animations[animName].index;
+        speed = animations[animName].speed;
     }
 };
 

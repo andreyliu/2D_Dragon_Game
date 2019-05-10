@@ -14,17 +14,21 @@ Map::~Map()
 
 void Map::LoadMap(std::string path, int sizeX, int sizeY)
 {
-    char tile;
+    char c;
     std::fstream mapFile;
     mapFile.open(path);
+    
+    int srcX, srcY;
     
     for (int col = 0; col < sizeY; col++)
     {
         for (int row = 0; row < sizeX; row++)
         {
-            mapFile.get(tile);
-            std::cout << tile << std::endl;
-            Game::AddTile(atoi(&tile), row * 32, col * 32);
+            mapFile.get(c);
+            srcY = atoi(&c);
+            mapFile.get(c);
+            srcX = atoi(&c);
+            Game::AddTile(srcX * 32, srcY * 32, row * 64, col * 64);
             mapFile.ignore();
         }
     }

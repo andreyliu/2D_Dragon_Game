@@ -9,9 +9,9 @@ public:
     Vector2D position;
     Vector2D velocity;
     
-    int height = 80;
-    int width = 95;
-    int scale = 1;
+    int height = 161;
+    int width = 191;
+    float scale = 1;
     
     int speed = 3;
     
@@ -21,9 +21,9 @@ public:
         TransformComponent(0.0f, 0.0f);
     }
     
-    TransformComponent(int sc)
+    TransformComponent(float sc)
     {
-        TransformComponent();
+        TransformComponent(400, 320);
         scale = sc;
     }
     

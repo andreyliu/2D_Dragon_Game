@@ -38,6 +38,9 @@
 		7B0DC76F2284C83D00F7DBC4 /* grass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grass.png; sourceTree = "<group>"; };
 		7B0DC7702284C83D00F7DBC4 /* dirt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dirt.png; sourceTree = "<group>"; };
 		7B0DC7712284D21100F7DBC4 /* ECS.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ECS.cpp; sourceTree = "<group>"; };
+		7B0DC7732284DB1800F7DBC4 /* Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
+		7B0DC7742284EA9400F7DBC4 /* map.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = map.map; sourceTree = "<group>"; };
+		7B0DC7752284EA9400F7DBC4 /* terrain_ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = terrain_ss.png; sourceTree = "<group>"; };
 		7B86DEE32283585900D96980 /* 2D_Game_Engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 2D_Game_Engine; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B86DEE62283585900D96980 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		7B86DEEE2283587800D96980 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
@@ -138,6 +141,8 @@
 		7B86DEF42283659400D96980 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				7B0DC7742284EA9400F7DBC4 /* map.map */,
+				7B0DC7752284EA9400F7DBC4 /* terrain_ss.png */,
 				7B0DC7702284C83D00F7DBC4 /* dirt.png */,
 				7B0DC76F2284C83D00F7DBC4 /* grass.png */,
 				7B0DC76E2284C83D00F7DBC4 /* p16x16.map */,
@@ -152,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				7B86DF082283A45800D96980 /* ECS.h */,
+				7B0DC7732284DB1800F7DBC4 /* Animation.h */,
 				7B0DC7712284D21100F7DBC4 /* ECS.cpp */,
 				7B86DF092283ACFB00D96980 /* Components.h */,
 				7B86DF0B2283B70700D96980 /* TransformComponent.h */,

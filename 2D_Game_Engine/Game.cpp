@@ -16,7 +16,9 @@ SDL_Event Game::event;
 std::vector<ColliderComponent *> Game::colliders;
 
 auto &player(manager.addEntity());
-auto &wall(manager.addEntity());
+//auto &wall(manager.addEntity());
+
+const char *mapFile = "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/terrain_ss.png";
 
 enum groupLabels : std::size_t
 {
@@ -57,20 +59,20 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     map = new Map();
     
     //ecs system
-    Map::LoadMap("/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/p16x16.map", 16, 16);
+    Map::LoadMap("/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/map.map", 25, 20);
 
     
-    player.addComponent<TransformComponent>(2);
-    player.addComponent<SpriteComponent>("/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/dragon.png", 3, 300);
+    player.addComponent<TransformComponent>();
+    player.addComponent<SpriteComponent>("/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/dragon1.png", true);
     
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
     
-    wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
-    wall.addComponent<SpriteComponent>("/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/dirt.png");
-    wall.addComponent<ColliderComponent>("wall");
-    wall.addGroup(groupMap);
+//    wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
+//    wall.addComponent<SpriteComponent>("/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/dirt.png");
+//    wall.addComponent<ColliderComponent>("wall");
+//    wall.addGroup(groupMap);
 }
 
 void Game::handleEvents()
@@ -96,7 +98,7 @@ void Game::update()
         Collision::AABB(player.getComponent<ColliderComponent>(), *cc);
     }
     
-    std::cout << player.getComponent<TransformComponent>().position << std::endl;
+//    std::cout << player.getComponent<TransformComponent>().position << std::endl;
 }
 
 auto &tiles(manager.getGroup(groupMap));
@@ -133,9 +135,9 @@ void Game::clean()
     std::cout << "Game cleaned" << std::endl;
 }
 
-void Game::AddTile(int ID, int x, int y)
+void Game::AddTile(int srcX, int srcY, int xpos, int ypos)
 {
     auto &tile(manager.addEntity());
-    tile.addComponent<TileComponent>(x, y, 32, 32, ID);
+    tile.addComponent<TileComponent>(srcX, srcY, xpos, ypos, mapFile);
     tile.addGroup(groupMap);
 }
