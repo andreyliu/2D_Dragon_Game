@@ -18,12 +18,12 @@ public:
     
     TransformComponent()
     {
-        TransformComponent(0.0f, 0.0f);
+        TransformComponent(400, 320);
     }
     
     TransformComponent(float sc)
     {
-        TransformComponent(400, 320);
+        TransformComponent();
         scale = sc;
     }
     
@@ -48,7 +48,7 @@ public:
     }
     void update() override
     {
-        position.x += velocity.x * speed;
-        position.y += velocity.y * speed;
+//        position.x += velocity.x * speed;
+//        position.y += velocity.y * speed;
     }
 };

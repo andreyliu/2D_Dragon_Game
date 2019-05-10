@@ -15,6 +15,8 @@ SDL_Event Game::event;
 
 std::vector<ColliderComponent *> Game::colliders;
 
+bool Game::isRunning = false;
+
 auto &player(manager.addEntity());
 //auto &wall(manager.addEntity());
 
@@ -28,6 +30,9 @@ enum groupLabels : std::size_t
     groupColliders
 };
 
+auto &tiles(manager.getGroup(groupMap));
+auto &players(manager.getGroup(groupPlayers));
+auto &enemies(manager.getGroup(groupEnemies));
 
 Game::Game()
 {}
@@ -63,16 +68,13 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
     
     player.addComponent<TransformComponent>();
+    player.getComponent<TransformComponent>().position.x = 300;
+    player.getComponent<TransformComponent>().position.y = 220;
     player.addComponent<SpriteComponent>("/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/dragon1.png", true);
     
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
-    
-//    wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
-//    wall.addComponent<SpriteComponent>("/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/dirt.png");
-//    wall.addComponent<ColliderComponent>("wall");
-//    wall.addGroup(groupMap);
 }
 
 void Game::handleEvents()
@@ -93,6 +95,15 @@ void Game::update()
     manager.refresh();
     manager.update();
     
+    Vector2D pVel = player.getComponent<TransformComponent>().velocity;
+    int pSpeed = player.getComponent<TransformComponent>().speed;
+    
+    for (auto t : tiles)
+    {
+        t->getComponent<TileComponent>().destRect.x += -(pVel.x * pSpeed);
+        t->getComponent<TileComponent>().destRect.y += -(pVel.y * pSpeed);
+    }
+    
     for (auto cc : colliders) {
 
         Collision::AABB(player.getComponent<ColliderComponent>(), *cc);
@@ -100,10 +111,6 @@ void Game::update()
     
 //    std::cout << player.getComponent<TransformComponent>().position << std::endl;
 }
-
-auto &tiles(manager.getGroup(groupMap));
-auto &players(manager.getGroup(groupPlayers));
-auto &enemies(manager.getGroup(groupEnemies));
 
 void Game::render()
 {
