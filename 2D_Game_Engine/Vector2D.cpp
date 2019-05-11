@@ -93,9 +93,14 @@ Vector2D &Vector2D::Zero()
     return *this;
 }
 
+float Vector2D::L2Norm()
+{
+    return std::sqrt(this->x * this->x + this->y * this->y);
+}
+
 void Vector2D::Normalize()
 {
-    float norm = std::sqrt(this->x * this->x + this->y * this->y);
+    float norm = Vector2D::L2Norm();
     if (norm == 0.0f)
     {
         Vector2D::Clear();

@@ -26,7 +26,7 @@ public:
     
     TTF_Font *GetFont(std::string ID);
     
-    void CreateProjectile(Entity &entity, Game::Roles type);
+    void CreateProjectile(Entity &entity, Game::Roles type, char option);
     
 private:
     
@@ -36,5 +36,5 @@ private:
     
     static const int pSpeed = 0.5;
     
-    void CreateProjectile(Entity &projectile, Entity &player, int range, int speed, int dmg, std::string id);
+    void CreateProjectile(Entity &projectile, Entity &player, int range, int speed, int dmg, std::string id, char option);
 };

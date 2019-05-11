@@ -51,6 +51,7 @@
 		7B0DC77E2285F43100F7DBC4 /* arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = arial.ttf; sourceTree = "<group>"; };
 		7B0DC77F2285F59B00F7DBC4 /* UILabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UILabel.h; sourceTree = "<group>"; };
 		7B0DC7802285FD6200F7DBC4 /* libSDL2_ttf-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_ttf-2.0.0.dylib"; path = "../../../../../usr/local/Cellar/sdl2_ttf/2.0.14/lib/libSDL2_ttf-2.0.0.dylib"; sourceTree = "<group>"; };
+		7B0DC7822286E53B00F7DBC4 /* EnemyComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnemyComponent.h; sourceTree = "<group>"; };
 		7B86DEE32283585900D96980 /* 2D_Game_Engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 2D_Game_Engine; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B86DEE62283585900D96980 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		7B86DEEE2283587800D96980 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
@@ -175,6 +176,7 @@
 				7B0DC7712284D21100F7DBC4 /* ECS.cpp */,
 				7B86DF092283ACFB00D96980 /* Components.h */,
 				7B86DF0B2283B70700D96980 /* TransformComponent.h */,
+				7B0DC7822286E53B00F7DBC4 /* EnemyComponent.h */,
 				7B86DF102283D6FA00D96980 /* KeyboardController.h */,
 				7B0DC77A2285DD6100F7DBC4 /* ProjectileComponent.h */,
 				7B86DF112283DA7500D96980 /* ColliderComponent.h */,

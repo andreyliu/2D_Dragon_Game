@@ -7,18 +7,6 @@
 #include <string>
 #include "../AssetManager.h"
 
-struct DisplaySize
-{
-    int width;
-    int height;
-    
-    DisplaySize(int w, int h)
-    {
-        width = w;
-        height = h;
-    }
-};
-
 class SpriteComponent : public Component
 {
 private:
@@ -29,7 +17,6 @@ private:
     std::string ID;
     
     bool animated = false;
-    bool visible = true;
     int frames = 0;
     int speed = 100;
     
@@ -111,7 +98,6 @@ public:
     
     void draw() override
     {
-        if (!visible) return;
         TextureManager::Draw(texture, srcRect, destRect, spriteFlip);
     }
     
@@ -144,19 +130,9 @@ public:
         Play(currAnimation);
     }
     
-    DisplaySize *getSize()
+    Vector2D *getSize()
     {
-        return new DisplaySize(destRect.w, destRect.h);
-    }
-    
-    void setVisible(bool val)
-    {
-        visible = val;
-    }
-    
-    bool Visible()
-    {
-        return visible;
+        return new Vector2D(destRect.w, destRect.h);
     }
 };
 

@@ -3,6 +3,7 @@
 #include "../Game.h"
 #include "ECS.h"
 #include "Components.h"
+#include <memory>
 
 class KeyboardController : public Component
 {
@@ -37,7 +38,7 @@ public:
     
     void update() override
     {
-        if (Game::event.type == SDL_KEYDOWN)
+        if (Game::event.type == SDL_KEYDOWN && Game::event.key.repeat == 0)
         {
             switch (Game::event.key.keysym.sym)
             {
@@ -53,9 +54,19 @@ public:
                 case SDLK_s:
                     changeVdir("Down", 1);
                     break;
-                case SDLK_SPACE:
+                case SDLK_k:
                     sprite->attackMode();
-                    Game::assets->CreateProjectile(player, Game::playerRole);
+                    Game::assets->CreateProjectile(player, Game::playerRole, 'N');
+                    break;
+                    
+                case SDLK_j:
+                    sprite->attackMode();
+                    Game::assets->CreateProjectile(player, Game::playerRole, 'D');
+                    break;
+                    
+                case SDLK_l:
+                    sprite->attackMode();
+                    Game::assets->CreateProjectile(player, Game::playerRole, 'U');
                     break;
                     
                 default:
@@ -86,8 +97,9 @@ public:
                 case SDLK_ESCAPE:
                     Game::isRunning = false;
                     break;
-                    
-                case SDLK_SPACE:
+                case SDLK_j:
+                case SDLK_l:
+                case SDLK_k:
                     sprite->reverseAttackMode();
                     break;
                 default:

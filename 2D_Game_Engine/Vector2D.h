@@ -27,9 +27,9 @@ public:
     
     Vector2D &operator*(const int &i);
     Vector2D &Zero();
+    float L2Norm();
     void Normalize();
     void Clear();
 
-    
     friend std::ostream &operator<<(std::ostream &stream, const Vector2D &vec);
 };
