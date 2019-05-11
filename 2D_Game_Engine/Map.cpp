@@ -24,6 +24,9 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY)
     
     int srcX, srcY;
     
+    mapW = sizeX * scaledSize;
+    mapH = sizeY * scaledSize;
+    
     for (int col = 0; col < sizeY; col++)
     {
         for (int row = 0; row < sizeX; row++)

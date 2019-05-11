@@ -1,4 +1,5 @@
 #include "Vector2D.h"
+#include <cmath>
 
 Vector2D::Vector2D()
 {
@@ -90,6 +91,25 @@ Vector2D &Vector2D::Zero()
 {
     this->x = this-> y = 0;
     return *this;
+}
+
+void Vector2D::Normalize()
+{
+    float norm = std::sqrt(this->x * this->x + this->y * this->y);
+    if (norm == 0.0f)
+    {
+        Vector2D::Clear();
+        return;
+    }
+    this->x /= norm;
+    this->y /= norm;
+}
+
+void Vector2D::Clear()
+{
+    this->x = 0;
+    this->y = 0;
+
 }
 
 std::ostream &operator<<(std::ostream &stream, const Vector2D &vec)

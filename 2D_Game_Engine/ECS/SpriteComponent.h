@@ -4,6 +4,7 @@
 #include "../TextureManager.h"
 #include "Animation.h"
 #include <map>
+#include <string>
 #include "../AssetManager.h"
 
 class SpriteComponent : public Component
@@ -12,6 +13,7 @@ private:
     TransformComponent *transform;
     SDL_Texture *texture;
     SDL_Rect srcRect, destRect;
+    const char *currAnimation;
     
     bool animated = false;
     int frames = 0;
@@ -93,9 +95,39 @@ public:
     
     void Play(const char *animName)
     {
+        currAnimation = animName;
         frames = animations[animName].frames;
         animIndex = animations[animName].index;
         speed = animations[animName].speed;
+    }
+    
+    void setAnimation(bool val)
+    {
+        animated = val;
+        if (val) {
+            Play(currAnimation);
+        }
+    }
+    
+    void attackMode()
+    {
+        if (strncmp(currAnimation, "Up", 2) == 0 || strncmp(currAnimation, "Down", 4) == 0)
+        {
+            return;
+        }
+        animated = false;
+        srcRect.x = 573;
+    }
+    
+    void reverseAttackMode()
+    {
+        if (strncmp(currAnimation, "Up", 2) == 0 || strncmp(currAnimation, "Down", 4) == 0)
+        {
+            return;
+        }
+        animated = true;
+        srcRect.x = 0;
+        Play(currAnimation);
     }
 };
 

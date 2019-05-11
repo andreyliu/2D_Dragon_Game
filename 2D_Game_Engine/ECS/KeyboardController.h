@@ -23,20 +23,29 @@ public:
             {
                 case SDLK_w:
                     transform->velocity.y = -1;
+                    transform->normalizeVelocity();
                     sprite->Play("Up");
                     break;
                 case SDLK_a:
                     transform->velocity.x = -1;
+                    transform->normalizeVelocity();
                     sprite->Play("Left");
                     break;
                 case SDLK_d:
                     transform->velocity.x = 1;
+                    transform->normalizeVelocity();
                     sprite->Play("Right");
                     break;
                 case SDLK_s:
                     transform->velocity.y = 1;
+                    transform->normalizeVelocity();
                     sprite->Play("Down");
                     break;
+                    
+                case SDLK_SPACE:
+                    sprite->attackMode();
+                    break;
+                    
                 default:
                     break;
             }
@@ -48,19 +57,26 @@ public:
             {
                 case SDLK_w:
                     transform->velocity.y = 0;
+                    transform->normalizeVelocity();
                     break;
                 case SDLK_a:
                     transform->velocity.x = 0;
-
+                    transform->normalizeVelocity();
                     break;
                 case SDLK_d:
                     transform->velocity.x = 0;
+                    transform->normalizeVelocity();
                     break;
                 case SDLK_s:
                     transform->velocity.y = 0;
+                    transform->normalizeVelocity();
                     break;
                 case SDLK_ESCAPE:
                     Game::isRunning = false;
+                    break;
+                    
+                case SDLK_SPACE:
+                    sprite->reverseAttackMode();
                     break;
                 default:
                     break;

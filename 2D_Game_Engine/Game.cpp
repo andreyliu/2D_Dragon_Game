@@ -66,7 +66,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     }
     
     assets->AddTexture("terrain", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/terrain_ss.png");
-    assets->AddTexture("player", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/dragon1.png");
+    assets->AddTexture("player", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/dragon2.png");
     assets->AddTexture("projectile", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/proj.png");
     
     assets->AddFont("arial", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/arial.ttf", 16);
@@ -128,6 +128,11 @@ void Game::update()
         if (Collision::AABB(cCol, playerCol))
         {
             player.getComponent<TransformComponent>().position = playerPos;
+            if (c->getComponent<ColliderComponent>().tag == "terrain")
+            {
+                player.getComponent<TransformComponent>().position -= player.getComponent<TransformComponent>().velocity;
+
+            }
         }
         
     }
@@ -146,28 +151,37 @@ void Game::update()
     
     if (camera.x < 0) camera.x = 0;
     if (camera.y < 0) camera.y = 0;
-    if (camera.x > camera.w) camera.x = camera.w;
-    if (camera.y > camera.h) camera.y = camera.h;
+    if (camera.x > map->mapW - camera.w) camera.x = camera.w;
+    if (camera.y > map->mapH - camera.h) camera.y = camera.h;
     
 }
+
 
 void Game::render()
 {
     SDL_RenderClear(renderer);
+    int xpos, ypos;
+    bool inXRange, inYRange;
     
     for (auto &t : tiles)
     {
-        t->draw();
+        xpos = t->getComponent<TileComponent>().position.x;
+        ypos = t->getComponent<TileComponent>().position.y;
+        
+        inXRange = (camera.x - map->scaledSize <= xpos)
+        && (xpos <= camera.x + map->scaledSize + camera.w);
+        inYRange = (camera.y - map->scaledSize <= ypos)
+        && (ypos <= camera.y + map->scaledSize + camera.h);
+        
+        if (inXRange && inYRange)
+        {
+            t->draw();
+        }
     }
     
     for (auto &p : players)
     {
         p->draw();
-    }
-    
-    for (auto &c : colliders)
-    {
-        c->draw();
     }
     
     for (auto &p : projectiles)

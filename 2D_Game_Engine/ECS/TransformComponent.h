@@ -51,4 +51,9 @@ public:
         position.x += velocity.x * speed;
         position.y += velocity.y * speed;
     }
+    
+    void normalizeVelocity()
+    {
+        velocity.Normalize();
+    }
 };

@@ -4,6 +4,11 @@
 class Map
 {
 public:
+    
+    int mapW;
+    int mapH;
+    int scaledSize;
+    
     Map(std::string tID, int ms, int ts);
     ~Map();
     
@@ -12,7 +17,6 @@ public:
     
 private:
     std::string texID;
-    int mapScale;
     int tileSize;
-    int scaledSize;
+    int mapScale;
 };
