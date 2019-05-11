@@ -7,6 +7,9 @@
 
 class AssetManager;
 class ColliderComponent;
+class Entity;
+
+extern Entity &player;
 
 class Game {
     
@@ -33,7 +36,14 @@ public:
         groupPlayers,
         groupEnemies,
         groupColliders,
-        groupProjectiles
+        groupProjectiles,
+        groupPlayerProjectiles
+    };
+    
+    enum Roles
+    {
+        playerRole,
+        enemyRole
     };
     
 private:

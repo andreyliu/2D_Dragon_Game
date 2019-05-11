@@ -23,13 +23,14 @@ AssetManager *Game::assets = new AssetManager(&manager);
 
 bool Game::isRunning = false;
 
-auto &player(manager.addEntity());
-auto &label(manager.addEntity());
+Entity &player(manager.addEntity());
+Entity &label(manager.addEntity());
 
 auto &tiles(manager.getGroup(Game::groupMap));
 auto &players(manager.getGroup(Game::groupPlayers));
 auto &colliders(manager.getGroup(Game::groupColliders));
 auto &projectiles(manager.getGroup(Game::groupProjectiles));
+auto &playerProj(manager.getGroup(Game::groupPlayerProjectiles));
 
 Game::Game()
 {}
@@ -68,6 +69,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     assets->AddTexture("terrain", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/terrain_ss.png");
     assets->AddTexture("player", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/dragon2.png");
     assets->AddTexture("projectile", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/proj.png");
+    assets->AddTexture("fireball", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/fireball.png");
     
     assets->AddFont("arial", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/arial.ttf", 16);
     
@@ -77,9 +79,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     map->LoadMap("/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/map.map", 25, 20);
 
     
-    player.addComponent<TransformComponent>(0.5);
-    player.getComponent<TransformComponent>().position.x = 400;
-    player.getComponent<TransformComponent>().position.y = 320;
+    player.addComponent<TransformComponent>(191, 161, 0.5);
     player.addComponent<SpriteComponent>("player", true);
     
     player.addComponent<KeyboardController>();
@@ -88,11 +88,6 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     
     SDL_Color white = { 255, 255, 255, 255 };
     label.addComponent<UILabel>(10, 10, "Test String", "arial", white);
-    
-    assets->CreateProjectile(Vector2D(200, 200), Vector2D(0.5, 0), 800, 2, "projectile");
-    assets->CreateProjectile(Vector2D(600, 620), Vector2D(0.2, 0), 200, 2, "projectile");
-    assets->CreateProjectile(Vector2D(400, 600), Vector2D(0.7, 1), 200, 2, "projectile");
-    assets->CreateProjectile(Vector2D(600, 600), Vector2D(0.5, -1), 200, 2, "projectile");
 }
 
 void Game::handleEvents()
@@ -146,6 +141,10 @@ void Game::update()
         }
     }
     
+    for (auto &p : playerProj)
+    {
+    }
+    
     camera.x = player.getComponent<TransformComponent>().position.x - 300;
     camera.y = player.getComponent<TransformComponent>().position.y - 220;
     
@@ -173,21 +172,14 @@ void Game::render()
         inYRange = (camera.y - map->scaledSize <= ypos)
         && (ypos <= camera.y + map->scaledSize + camera.h);
         
-        if (inXRange && inYRange)
-        {
-            t->draw();
-        }
+        if (inXRange && inYRange) t->draw();
     }
     
-    for (auto &p : players)
-    {
-        p->draw();
-    }
+    for (auto &p : players) p->draw();
     
-    for (auto &p : projectiles)
-    {
-        p->draw();
-    }
+    for (auto &p : projectiles) p->draw();
+    
+    for (auto &p : playerProj) p->draw();
     
     label.draw();
     

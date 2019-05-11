@@ -8,9 +8,10 @@ public:
     
     Vector2D position;
     Vector2D velocity;
+    Vector2D orientation = Vector2D(0, 1);
     
-    int height = 161;
-    int width = 191;
+    int height = 32;
+    int width = 32;
     float scale = 1;
     
     int speed = 3;
@@ -18,7 +19,8 @@ public:
     
     TransformComponent()
     {
-        TransformComponent(400, 320);
+        position.x = 400;
+        position.y = 320;
     }
     
     TransformComponent(float sc)
@@ -33,7 +35,16 @@ public:
         position.y = y;
     }
     
-    TransformComponent(float x, float y, int h, int w, int sc)
+    TransformComponent(int w, int h, float sc)
+    {
+        position.x = 400;
+        position.y = 320;
+        height = h;
+        width = w;
+        scale = sc;
+    }
+    
+    TransformComponent(float x, float y, int w, int h, float sc)
     {
         position.x = x;
         position.y = y;
@@ -41,6 +52,7 @@ public:
         width = w;
         scale = sc;
     }
+    
     
     void init() override
     {

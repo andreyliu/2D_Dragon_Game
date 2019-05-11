@@ -6,6 +6,26 @@
 
 class KeyboardController : public Component
 {
+private:
+    void changeVdir(const char *dirName, int dir)
+    {
+        transform->velocity.y = dir;
+        transform->orientation.Clear();
+        transform->orientation.y = dir;
+        transform->normalizeVelocity();
+        sprite->Play(dirName);
+
+    }
+    
+    void changeHdir(const char *dirName, int dir)
+    {
+        transform->velocity.x = dir;
+        transform->orientation.Clear();
+        transform->orientation.x = dir;
+        transform->normalizeVelocity();
+        sprite->Play(dirName);
+        
+    }
 public:
     TransformComponent *transform;
     SpriteComponent *sprite;
@@ -22,28 +42,20 @@ public:
             switch (Game::event.key.keysym.sym)
             {
                 case SDLK_w:
-                    transform->velocity.y = -1;
-                    transform->normalizeVelocity();
-                    sprite->Play("Up");
+                    changeVdir("Up", -1);
                     break;
                 case SDLK_a:
-                    transform->velocity.x = -1;
-                    transform->normalizeVelocity();
-                    sprite->Play("Left");
+                    changeHdir("Left", -1);
                     break;
                 case SDLK_d:
-                    transform->velocity.x = 1;
-                    transform->normalizeVelocity();
-                    sprite->Play("Right");
+                    changeHdir("Right", 1);
                     break;
                 case SDLK_s:
-                    transform->velocity.y = 1;
-                    transform->normalizeVelocity();
-                    sprite->Play("Down");
+                    changeVdir("Down", 1);
                     break;
-                    
                 case SDLK_SPACE:
                     sprite->attackMode();
+                    Game::assets->CreateProjectile(player, Game::playerRole);
                     break;
                     
                 default:

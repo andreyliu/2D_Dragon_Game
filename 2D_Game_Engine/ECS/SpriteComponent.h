@@ -7,6 +7,18 @@
 #include <string>
 #include "../AssetManager.h"
 
+struct DisplaySize
+{
+    int width;
+    int height;
+    
+    DisplaySize(int w, int h)
+    {
+        width = w;
+        height = h;
+    }
+};
+
 class SpriteComponent : public Component
 {
 private:
@@ -14,8 +26,10 @@ private:
     SDL_Texture *texture;
     SDL_Rect srcRect, destRect;
     const char *currAnimation;
+    std::string ID;
     
     bool animated = false;
+    bool visible = true;
     int frames = 0;
     int speed = 100;
     
@@ -31,12 +45,40 @@ public:
     SpriteComponent(std::string ID)
     {
         setTex(ID);
+        this->ID = ID;
     }
     
     SpriteComponent(std::string ID, bool isAnimated)
     {
+        setTex(ID);
+        this->ID = ID;
         animated = isAnimated;
-        if (isAnimated)
+    }
+    
+    ~SpriteComponent()
+    {}
+    
+    void setTex(std::string ID)
+    {
+        texture = Game::assets->GetTexture(ID);
+    }
+    
+    void addAnimation(int index, int nFrames, int speed, const char *name)
+    {
+        Animation anim = Animation(index, nFrames, speed);
+        animations.emplace(name, anim);
+        Play(name);
+    }
+    
+    void init() override
+    {
+        transform = &entity->getComponent<TransformComponent>();
+        srcRect.x = srcRect.y = 0;
+        srcRect.w = transform->width;
+        srcRect.h = transform->height;
+        destRect.w = static_cast<int>(transform->width * transform->scale);
+        destRect.h = static_cast<int>(transform->height * transform->scale);
+        if (animated && ID == "player")
         {
             Animation up = Animation(0, 3, 300);
             Animation right = Animation(1, 3, 300);
@@ -50,27 +92,6 @@ public:
             
             Play("Down");
         }
-        
-        setTex(ID);
-    }
-    
-    ~SpriteComponent()
-    {}
-    
-    void setTex(std::string ID)
-    {
-        texture = Game::assets->GetTexture(ID);
-    }
-    
-    void init() override
-    {
-        transform = &entity->getComponent<TransformComponent>();
-        
-        srcRect.x = srcRect.y = 0;
-        srcRect.w = 191;
-        srcRect.h = 161;
-        destRect.w = transform->width;
-        destRect.h = transform->height;
     }
     
     void update() override
@@ -90,6 +111,7 @@ public:
     
     void draw() override
     {
+        if (!visible) return;
         TextureManager::Draw(texture, srcRect, destRect, spriteFlip);
     }
     
@@ -99,14 +121,6 @@ public:
         frames = animations[animName].frames;
         animIndex = animations[animName].index;
         speed = animations[animName].speed;
-    }
-    
-    void setAnimation(bool val)
-    {
-        animated = val;
-        if (val) {
-            Play(currAnimation);
-        }
     }
     
     void attackMode()
@@ -128,6 +142,21 @@ public:
         animated = true;
         srcRect.x = 0;
         Play(currAnimation);
+    }
+    
+    DisplaySize *getSize()
+    {
+        return new DisplaySize(destRect.w, destRect.h);
+    }
+    
+    void setVisible(bool val)
+    {
+        visible = val;
+    }
+    
+    bool Visible()
+    {
+        return visible;
     }
 };
 

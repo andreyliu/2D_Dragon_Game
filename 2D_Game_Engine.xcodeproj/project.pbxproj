@@ -15,7 +15,6 @@
 		7B86DEFA22836D0500D96980 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B86DEF722836B2000D96980 /* libSDL2-2.0.0.dylib */; };
 		7B86DEFB22836D1300D96980 /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B86DEF5228368E300D96980 /* libSDL2_image-2.0.0.dylib */; };
 		7B86DF0022837BAC00D96980 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B86DEFF22837BAC00D96980 /* TextureManager.cpp */; };
-		7B86DF0322837E2300D96980 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B86DF0222837E2300D96980 /* GameObject.cpp */; };
 		7B86DF0722839BCC00D96980 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B86DF0622839BCC00D96980 /* Map.cpp */; };
 		7B86DF0F2283C7DB00D96980 /* Vector2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B86DF0E2283C7DB00D96980 /* Vector2D.cpp */; };
 		7B86DF142283DFF300D96980 /* Collision.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B86DF132283DFF300D96980 /* Collision.cpp */; };
@@ -62,8 +61,6 @@
 		7B86DEFD228372CE00D96980 /* dragon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dragon.png; sourceTree = "<group>"; };
 		7B86DEFE22837B3A00D96980 /* TextureManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextureManager.h; sourceTree = "<group>"; };
 		7B86DEFF22837BAC00D96980 /* TextureManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextureManager.cpp; sourceTree = "<group>"; };
-		7B86DF0122837D4900D96980 /* GameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
-		7B86DF0222837E2300D96980 /* GameObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
 		7B86DF042283978500D96980 /* dragon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dragon1.png; sourceTree = "<group>"; };
 		7B86DF0522839B0400D96980 /* Map.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		7B86DF0622839BCC00D96980 /* Map.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
@@ -117,10 +114,8 @@
 				7B86DF0C2283B77000D96980 /* ECS */,
 				7B86DEF42283659400D96980 /* assets */,
 				7B86DEE62283585900D96980 /* main.cpp */,
-				7B86DF0122837D4900D96980 /* GameObject.h */,
 				7B86DF122283DF8500D96980 /* Collision.h */,
 				7B86DF132283DFF300D96980 /* Collision.cpp */,
-				7B86DF0222837E2300D96980 /* GameObject.cpp */,
 				7B86DF0522839B0400D96980 /* Map.h */,
 				7B86DF0622839BCC00D96980 /* Map.cpp */,
 				7B86DEF1228358C800D96980 /* Game.h */,
@@ -247,7 +242,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B86DF142283DFF300D96980 /* Collision.cpp in Sources */,
-				7B86DF0322837E2300D96980 /* GameObject.cpp in Sources */,
 				7B86DF0722839BCC00D96980 /* Map.cpp in Sources */,
 				7B0DC7722284D21100F7DBC4 /* ECS.cpp in Sources */,
 				7B86DF0F2283C7DB00D96980 /* Vector2D.cpp in Sources */,
