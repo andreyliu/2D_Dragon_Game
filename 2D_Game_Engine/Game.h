@@ -33,19 +33,25 @@ public:
     enum groupLabels : std::size_t
     {
         groupMap,
-        groupPlayers,
+        groupPlayerProjectiles,
+        groupProjectiles,
         groupEnemies,
         groupColliders,
-        groupProjectiles,
-        groupPlayerProjectiles
+        groupPlayers
+        
+        
     };
     
-    enum Roles
+    enum PType
     {
-        playerRole,
-        enemyRole
+        playerT,
+        playerFlameT,
+        enemyBasicT,
+        enemyGeneralT
     };
     
 private:
     SDL_Window *window;
+    
+    template<typename T> bool inView(Entity *t);
 };

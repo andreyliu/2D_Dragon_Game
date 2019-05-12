@@ -7,7 +7,7 @@ public:
     
     int mapW;
     int mapH;
-    int scaledSize;
+    static int scaledSize;
     
     Map(std::string tID, int ms, int ts);
     ~Map();

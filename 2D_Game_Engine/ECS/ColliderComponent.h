@@ -9,7 +9,7 @@ class ColliderComponent : public Component
     
 public:
     
-    SDL_Rect collider;
+    SDL_Rect collider = { 0, 0, 0, 0 };
     std::string tag;
     
     SDL_Texture *tex;

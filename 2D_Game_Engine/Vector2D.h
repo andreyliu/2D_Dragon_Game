@@ -4,6 +4,7 @@
 class Vector2D
 {
 public:
+    static Vector2D *ZeroVector;
     float x;
     float y;
     
@@ -15,6 +16,8 @@ public:
     Vector2D &Multiply(const Vector2D &vec);
     Vector2D &Divide(const Vector2D &vec);
     
+    Vector2D &Multiply(const float factor);
+    
     friend Vector2D &operator+(Vector2D &v1, const Vector2D &v2);
     friend Vector2D &operator-(Vector2D &v1, const Vector2D &v2);
     friend Vector2D &operator*(Vector2D &v1, const Vector2D &v2);
@@ -25,8 +28,13 @@ public:
     Vector2D &operator*=(const Vector2D &vec);
     Vector2D &operator/=(const Vector2D &vec);
     
-    Vector2D &operator*(const int &i);
+    friend Vector2D &operator*(Vector2D &v1, const float i);
+    friend Vector2D &operator*(const float i, Vector2D &v1);
+    Vector2D &operator*=(const float i);
+    Vector2D *Diff(const Vector2D &vec);
+    
     Vector2D &Zero();
+    Vector2D *TurnTo(Vector2D &dest);
     float L2Norm();
     void Normalize();
     void Clear();

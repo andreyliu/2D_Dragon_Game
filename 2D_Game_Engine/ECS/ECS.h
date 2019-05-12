@@ -130,6 +130,14 @@ public:
     }
     void draw()
     {
+//        for (std::vector<std::unique_ptr<Entity>>::iterator i = entities.end(); i-- != entities.begin(); ) {
+//            (*i)->draw(); // <- process it
+//        }
+        
+//        for (auto it = entities.rend(); it != entities.rbegin(); --it)
+//        {
+//            (*it)->draw();
+//        }
         for (auto &e : entities) e->draw();
     }
     

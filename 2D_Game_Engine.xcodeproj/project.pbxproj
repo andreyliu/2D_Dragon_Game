@@ -10,6 +10,7 @@
 		7B0DC7722284D21100F7DBC4 /* ECS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DC7712284D21100F7DBC4 /* ECS.cpp */; };
 		7B0DC7792285795F00F7DBC4 /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DC7782285795F00F7DBC4 /* AssetManager.cpp */; };
 		7B0DC7812285FD6200F7DBC4 /* libSDL2_ttf-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B0DC7802285FD6200F7DBC4 /* libSDL2_ttf-2.0.0.dylib */; };
+		7B0DC7852287E38200F7DBC4 /* Enemies.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DC7842287E38200F7DBC4 /* Enemies.cpp */; };
 		7B86DEE72283585900D96980 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B86DEE62283585900D96980 /* main.cpp */; };
 		7B86DEF2228358C800D96980 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B86DEF0228358C800D96980 /* Game.cpp */; };
 		7B86DEFA22836D0500D96980 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B86DEF722836B2000D96980 /* libSDL2-2.0.0.dylib */; };
@@ -52,6 +53,8 @@
 		7B0DC77F2285F59B00F7DBC4 /* UILabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UILabel.h; sourceTree = "<group>"; };
 		7B0DC7802285FD6200F7DBC4 /* libSDL2_ttf-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_ttf-2.0.0.dylib"; path = "../../../../../usr/local/Cellar/sdl2_ttf/2.0.14/lib/libSDL2_ttf-2.0.0.dylib"; sourceTree = "<group>"; };
 		7B0DC7822286E53B00F7DBC4 /* EnemyComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnemyComponent.h; sourceTree = "<group>"; };
+		7B0DC7832287E25000F7DBC4 /* Enemies.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Enemies.h; sourceTree = "<group>"; };
+		7B0DC7842287E38200F7DBC4 /* Enemies.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Enemies.cpp; sourceTree = "<group>"; };
 		7B86DEE32283585900D96980 /* 2D_Game_Engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 2D_Game_Engine; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B86DEE62283585900D96980 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		7B86DEEE2283587800D96980 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
@@ -117,6 +120,8 @@
 				7B86DEE62283585900D96980 /* main.cpp */,
 				7B86DF122283DF8500D96980 /* Collision.h */,
 				7B86DF132283DFF300D96980 /* Collision.cpp */,
+				7B0DC7832287E25000F7DBC4 /* Enemies.h */,
+				7B0DC7842287E38200F7DBC4 /* Enemies.cpp */,
 				7B86DF0522839B0400D96980 /* Map.h */,
 				7B86DF0622839BCC00D96980 /* Map.cpp */,
 				7B86DEF1228358C800D96980 /* Game.h */,
@@ -248,6 +253,7 @@
 				7B0DC7722284D21100F7DBC4 /* ECS.cpp in Sources */,
 				7B86DF0F2283C7DB00D96980 /* Vector2D.cpp in Sources */,
 				7B86DEE72283585900D96980 /* main.cpp in Sources */,
+				7B0DC7852287E38200F7DBC4 /* Enemies.cpp in Sources */,
 				7B0DC7792285795F00F7DBC4 /* AssetManager.cpp in Sources */,
 				7B86DEF2228358C800D96980 /* Game.cpp in Sources */,
 				7B86DF0022837BAC00D96980 /* TextureManager.cpp in Sources */,

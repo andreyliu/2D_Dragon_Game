@@ -8,6 +8,32 @@
 class KeyboardController : public Component
 {
 private:
+    
+    Uint32 lastAttack = 0;
+    
+    void RoarAttack()
+    {
+        if (Game::event.key.repeat == 0)
+        {
+            return;
+        }
+        bool side = player.getComponent<TransformComponent>().orientation.x != 0;
+        Uint32 tick = SDL_GetTicks();
+        if (tick - lastAttack < 50) return;
+        std::cout << "ROAR ATTACK" << std::endl;
+        lastAttack = tick;
+        Game::assets->CreateProjectile(player, Game::playerFlameT, 'N', side);
+    }
+    
+    void FireballAttack(char option)
+    {
+        bool side = player.getComponent<TransformComponent>().orientation.x != 0;
+        Uint32 tick = SDL_GetTicks();
+        if (tick - lastAttack < 300) return;
+        lastAttack = tick;
+        Game::assets->CreateProjectile(player, Game::playerT, option, side);
+    }
+    
     void changeVdir(const char *dirName, int dir)
     {
         transform->velocity.y = dir;
@@ -38,7 +64,7 @@ public:
     
     void update() override
     {
-        if (Game::event.type == SDL_KEYDOWN && Game::event.key.repeat == 0)
+        if (Game::event.type == SDL_KEYDOWN) // && Game::event.key.repeat == 0
         {
             switch (Game::event.key.keysym.sym)
             {
@@ -55,18 +81,19 @@ public:
                     changeVdir("Down", 1);
                     break;
                 case SDLK_k:
-                    sprite->attackMode();
-                    Game::assets->CreateProjectile(player, Game::playerRole, 'N');
+                    FireballAttack('N');
                     break;
                     
                 case SDLK_j:
-                    sprite->attackMode();
-                    Game::assets->CreateProjectile(player, Game::playerRole, 'D');
+                    FireballAttack('D');
                     break;
                     
                 case SDLK_l:
-                    sprite->attackMode();
-                    Game::assets->CreateProjectile(player, Game::playerRole, 'U');
+                    FireballAttack('U');
+                    break;
+                    
+                case SDLK_SPACE:
+                    RoarAttack();
                     break;
                     
                 default:
@@ -93,14 +120,6 @@ public:
                 case SDLK_s:
                     transform->velocity.y = 0;
                     transform->normalizeVelocity();
-                    break;
-                case SDLK_ESCAPE:
-                    Game::isRunning = false;
-                    break;
-                case SDLK_j:
-                case SDLK_l:
-                case SDLK_k:
-                    sprite->reverseAttackMode();
                     break;
                 default:
                     break;

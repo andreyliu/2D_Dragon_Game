@@ -2,6 +2,7 @@
 #include "TextureManager.h"
 #include "GameObject.h"
 #include "Map.h"
+#include "Enemies.h"
 #include "ECS/Components.h"
 #include "Vector2D.h"
 #include "Collision.h"
@@ -11,6 +12,7 @@
 
 Map *map;
 Manager manager;
+Enemies *enemiesLoader;
 
 SDL_Renderer *Game::renderer = nullptr;
 SDL_Event Game::event;
@@ -28,6 +30,8 @@ Entity &label(manager.addEntity());
 
 auto &tiles(manager.getGroup(Game::groupMap));
 auto &players(manager.getGroup(Game::groupPlayers));
+auto &enemies(manager.getGroup(Game::groupEnemies));
+
 auto &colliders(manager.getGroup(Game::groupColliders));
 auto &projectiles(manager.getGroup(Game::groupProjectiles));
 auto &playerProj(manager.getGroup(Game::groupPlayerProjectiles));
@@ -67,9 +71,11 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     }
     
     assets->AddTexture("terrain", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/terrain_ss.png");
-    assets->AddTexture("player", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/dragon2.png");
+    assets->AddTexture("player", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/dragon2.1.png");
     assets->AddTexture("projectile", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/proj.png");
     assets->AddTexture("fireball", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/fireball.png");
+    assets->AddTexture("enemy", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/enemy.png");
+    assets->AddTexture("flame", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/flame.png");
     
     assets->AddFont("arial", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/arial.ttf", 16);
     
@@ -78,6 +84,9 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     //ecs system
     map->LoadMap("/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/map.map", 25, 20);
 
+    enemiesLoader = new Enemies();
+    
+    enemiesLoader->LoadEnemies("/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/enemies.map", 25, 20);
     
     player.addComponent<TransformComponent>(191, 161, 0.5);
     player.addComponent<SpriteComponent>("player", true);
@@ -86,13 +95,14 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
     
+    
+    
     SDL_Color white = { 255, 255, 255, 255 };
     label.addComponent<UILabel>(10, 10, "Test String", "arial", white);
 }
 
 void Game::handleEvents()
 {
-    
     SDL_PollEvent(&event);
     switch(event.type) {
         case SDL_QUIT:
@@ -115,8 +125,12 @@ void Game::update()
     label.getComponent<UILabel>().SetLabelText(ss.str(), "arial");
 
     manager.refresh();
-    manager.update();
     
+//    std::cout << player.getComponent<TransformComponent>().position << std::endl;
+    
+    manager.update();
+//    std::cout << "velocity: " << player.getComponent<TransformComponent>().velocity << std::endl;
+//    std::cout << "player" << player.getComponent<TransformComponent>().position << std::endl;
     for (auto &c : colliders)
     {
         SDL_Rect cCol = c->getComponent<ColliderComponent>().collider;
@@ -129,8 +143,34 @@ void Game::update()
 
             }
         }
-        
     }
+    
+    for (auto &c : colliders)
+    {
+        SDL_Rect cCol = c->getComponent<ColliderComponent>().collider;
+        if (c->getComponent<ColliderComponent>().tag != "enemy")
+        {
+            continue;
+        }
+        for (auto &c2 : colliders)
+        {
+            if (c2->getComponent<ColliderComponent>().tag != "enemy")
+            {
+                continue;
+            }
+            SDL_Rect c2Col = c2->getComponent<ColliderComponent>().collider;
+            if (Collision::AABB(cCol, c2Col))
+            {
+//                c->getComponent<TransformComponent>().position = playerPos;
+                c->getComponent<TransformComponent>().position -= c->getComponent<TransformComponent>().velocity;
+                c2->getComponent<TransformComponent>().position -= c2->getComponent<TransformComponent>().velocity;
+                
+            }
+
+        }
+        
+            }
+//    std::cout << player.getComponent<TransformComponent>().position << std::endl;
     
     for (auto &p : projectiles)
     {
@@ -141,8 +181,40 @@ void Game::update()
         }
     }
     
+    
+    
+    for (auto &e : enemies)
+    {
+        int xpos = e->getComponent<TransformComponent>().position.x;
+        int ypos = e->getComponent<TransformComponent>().position.y;
+        bool onMap = xpos > 0 && ypos > 0 && map->mapW > xpos && map->mapH > ypos;
+        if (!onMap)
+        {
+            e->destroy();
+        }
+    }
+    
     for (auto &p : playerProj)
     {
+        for (auto &e: enemies)
+        {
+            if (Collision::AABB(e->getComponent<ColliderComponent>().collider, p->getComponent<ColliderComponent>().collider))
+            {
+                std::cout << "Hit enemy!" << std::endl;
+                p->destroy();
+                e->destroy();
+            }
+            
+        }
+        
+        for (auto &ep : projectiles)
+        {
+            if (Collision::AABB(ep->getComponent<ColliderComponent>().collider, p->getComponent<ColliderComponent>().collider))
+            {
+                std::cout << "Hit enemy projectile!" << std::endl;
+                ep->destroy();
+            }
+        }
     }
     
     camera.x = player.getComponent<TransformComponent>().position.x - 300;
@@ -155,31 +227,42 @@ void Game::update()
     
 }
 
+template<typename T> bool Game::inView(Entity *t)
+{
+    int xpos, ypos;
+    bool inXRange, inYRange;
+    xpos = t->getComponent<T>().position.x;
+    ypos = t->getComponent<T>().position.y;
+    
+    inXRange = (camera.x - map->scaledSize <= xpos)
+    && (xpos <= camera.x + map->scaledSize + camera.w);
+    inYRange = (camera.y - map->scaledSize <= ypos)
+    && (ypos <= camera.y + map->scaledSize + camera.h);
+    
+    return inXRange && inYRange;
+    
+}
 
 void Game::render()
 {
     SDL_RenderClear(renderer);
-    int xpos, ypos;
-    bool inXRange, inYRange;
+    
     
     for (auto &t : tiles)
     {
-        xpos = t->getComponent<TileComponent>().position.x;
-        ypos = t->getComponent<TileComponent>().position.y;
-        
-        inXRange = (camera.x - map->scaledSize <= xpos)
-        && (xpos <= camera.x + map->scaledSize + camera.w);
-        inYRange = (camera.y - map->scaledSize <= ypos)
-        && (ypos <= camera.y + map->scaledSize + camera.h);
-        
-        if (inXRange && inYRange) t->draw();
+        if (Game::inView<TileComponent>(t)) t->draw();
     }
     
-    for (auto &p : players) p->draw();
+    for (auto &e : enemies)
+    {
+        if (Game::inView<TransformComponent>(e)) e ->draw();
+    }
     
     for (auto &p : projectiles) p->draw();
     
     for (auto &p : playerProj) p->draw();
+    
+    for (auto &p : players) p->draw();
     
     label.draw();
     

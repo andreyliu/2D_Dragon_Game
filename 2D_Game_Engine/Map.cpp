@@ -6,7 +6,10 @@
 
 extern Manager manager;
 
-Map::Map(std::string tID, int ms, int ts) : texID(tID), mapScale(ms), tileSize(ts)
+int Map::scaledSize = 0;
+
+Map::Map(std::string tID, int ms, int ts)
+: texID(tID), mapScale(ms), tileSize(ts)
 {
     scaledSize = ms * ts;
 }

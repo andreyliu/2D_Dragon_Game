@@ -20,9 +20,16 @@ private:
     int frames = 0;
     int speed = 100;
     
+    bool visible = true;
+    
 public:
     
     int animIndex = 0;
+    
+    void setVisible(bool val)
+    {
+        visible = val;
+    }
     
     std::map<const char *, Animation> animations;
     
@@ -98,6 +105,7 @@ public:
     
     void draw() override
     {
+        if (!visible) return;
         TextureManager::Draw(texture, srcRect, destRect, spriteFlip);
     }
     
