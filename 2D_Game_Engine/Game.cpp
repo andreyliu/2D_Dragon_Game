@@ -8,6 +8,7 @@
 #include "Collision.h"
 #include "AssetManager.h"
 #include <sstream>
+//#include <vector>
 
 
 Map *map;
@@ -21,6 +22,10 @@ SDL_Rect Game::camera = { 0, 0, 800, 640 };
 
 AssetManager *Game::assets = new AssetManager(&manager);
 
+int health = 1000;
+static int damage = 10;
+int score = 0;
+
 //std::vector<ColliderComponent *> Game::colliders;
 
 bool Game::isRunning = false;
@@ -30,7 +35,7 @@ Entity &label(manager.addEntity());
 
 auto &tiles(manager.getGroup(Game::groupMap));
 auto &players(manager.getGroup(Game::groupPlayers));
-auto &enemies(manager.getGroup(Game::groupEnemies));
+std::vector<Entity *> &enemies(manager.getGroup(Game::groupEnemies));
 
 auto &colliders(manager.getGroup(Game::groupColliders));
 auto &projectiles(manager.getGroup(Game::groupProjectiles));
@@ -77,7 +82,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     assets->AddTexture("enemy", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/enemy.png");
     assets->AddTexture("flame", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/flame.png");
     
-    assets->AddFont("arial", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/arial.ttf", 16);
+    assets->AddFont("SLB", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/SuperLegendBoy.ttf", 16);
     
     map = new Map("terrain", 2, 32);
     
@@ -98,7 +103,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     
     
     SDL_Color white = { 255, 255, 255, 255 };
-    label.addComponent<UILabel>(10, 10, "Test String", "arial", white);
+    label.addComponent<UILabel>(10, 10, "Test String", "SLB", white);
 }
 
 void Game::handleEvents()
@@ -120,9 +125,9 @@ void Game::update()
     
     std::stringstream ss;
     
-    ss << "Player position: " << playerPos;
+    ss << "HEALTH: " << health;
     
-    label.getComponent<UILabel>().SetLabelText(ss.str(), "arial");
+    label.getComponent<UILabel>().SetLabelText(ss.str(), "SLB");
 
     manager.refresh();
     
@@ -176,8 +181,10 @@ void Game::update()
     {
         if (Collision::AABB(player.getComponent<ColliderComponent>().collider, p->getComponent<ColliderComponent>().collider))
         {
-            std::cout << "Hit player!" << std::endl;
+//            std::cout << "Hit player!" << std::endl;
             p->destroy();
+            health -= damage;
+            score--;
         }
     }
     
@@ -200,9 +207,10 @@ void Game::update()
         {
             if (Collision::AABB(e->getComponent<ColliderComponent>().collider, p->getComponent<ColliderComponent>().collider))
             {
-                std::cout << "Hit enemy!" << std::endl;
+//                std::cout << "Hit enemy!" << std::endl;
                 p->destroy();
                 e->destroy();
+                score++;
             }
             
         }
@@ -275,4 +283,23 @@ void Game::clean()
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
     std::cout << "Game cleaned" << std::endl;
+}
+
+void Game::displayScore()
+{
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+    if (SDL_RenderClear(renderer) != 0)
+    {
+        std::cout << "Renderer failed to clear!" << std::endl;
+    }
+    SDL_Color white = { 255, 255, 255, 255 };
+    std::string EGText = std::string("GAME OVER");
+    std::string Score = std::string("Score: ") + std::to_string(score);
+    std::unique_ptr<UILabel> EGLabel = std::make_unique<UILabel>(320, 200, EGText, "SLB", white);
+    std::unique_ptr<UILabel> ScoreLabel = std::make_unique<UILabel>(340, 350, Score, "SLB", white);
+    std::unique_ptr<UILabel> MsgLabel = std::make_unique<UILabel>(580, 600, "press ESC to exit", "SLB", white);
+    EGLabel->draw();
+    ScoreLabel->draw();
+    MsgLabel->draw();
+    SDL_RenderPresent(renderer);
 }

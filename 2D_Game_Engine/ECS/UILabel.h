@@ -25,11 +25,16 @@ public:
     
     void SetLabelText(std::string text, std::string font)
     {
+        this->SetLabelText(text, font, &position.w, &position.h);
+    }
+    
+    void SetLabelText(std::string text, std::string font, int *w, int *h)
+    {
         SDL_Surface *surf = TTF_RenderText_Blended(Game::assets->GetFont(font), text.c_str(), textColor);
         labelTexture = SDL_CreateTextureFromSurface(Game::renderer, surf);
         SDL_FreeSurface(surf);
         
-        SDL_QueryTexture(labelTexture, nullptr, nullptr, &position.w, &position.h);
+        SDL_QueryTexture(labelTexture, nullptr, nullptr, w, h);
     }
     
     void draw() override

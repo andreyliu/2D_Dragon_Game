@@ -11,6 +11,10 @@ class Entity;
 
 extern Entity &player;
 
+extern int score;
+extern int health;
+extern std::vector<Entity *> &enemies;
+
 class Game {
     
 public:
@@ -22,6 +26,7 @@ public:
     void update();
     void render();
     void clean();
+    void displayScore();
     bool running() { return isRunning; }
     
     static SDL_Renderer *renderer;

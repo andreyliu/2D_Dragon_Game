@@ -11,7 +11,7 @@ int main(int argc, const char * argv[]) {
     
     Uint32 frameStart;
     int frameTime;
-    
+label:
     game = new Game();
     
     game->init("Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
@@ -27,7 +27,21 @@ int main(int argc, const char * argv[]) {
         {
             SDL_Delay(frameDelay - frameTime);
         }
+        if (enemies.size() == 0 || health <= 0)
+        {
+            Game::isRunning = false;
+        }
     }
+    game->displayScore();
+    
+    SDL_Event e;
+    do
+    {
+        if (SDL_WaitEvent(&e) != 1) std::cout << "Error Waiting for Event!" << std::endl;
+        if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) break;
+    }
+    while (e.type != SDL_QUIT); // e.type != SDL_KEYDOWN && 
+    
     
     game->clean();
     

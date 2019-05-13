@@ -7,7 +7,7 @@ static int fbSrcSize = 100;
 static float fbScale = 0.24;
 
 static int eSrcSize = 32;
-static float eScale = 1.0;
+static float eScale = 0.5;
 
 static int flameSrcSize = 45;
 static float flameScale = 1;

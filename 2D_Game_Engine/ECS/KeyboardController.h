@@ -17,6 +17,7 @@ private:
         {
             return;
         }
+        sprite->attackMode();
         bool side = player.getComponent<TransformComponent>().orientation.x != 0;
         Uint32 tick = SDL_GetTicks();
         if (tick - lastAttack < 50) return;
@@ -96,6 +97,10 @@ public:
                     RoarAttack();
                     break;
                     
+                case SDLK_ESCAPE:
+                    Game::isRunning = false;
+                    break;
+                    
                 default:
                     break;
             }
@@ -120,6 +125,9 @@ public:
                 case SDLK_s:
                     transform->velocity.y = 0;
                     transform->normalizeVelocity();
+                    break;
+                case SDLK_SPACE:
+                    sprite->reverseAttackMode();
                     break;
                 default:
                     break;
