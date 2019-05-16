@@ -26,7 +26,7 @@ public:
     
     TTF_Font *GetFont(std::string ID);
     
-    void CreateProjectile(Entity &entity, Game::PType type, char option, bool sideMode);
+    void CreateProjectile(Entity &entity, Game::PType type, char option, bool sideOffset);
     
     void CreateEnemy(float walkR, int xpos, int ypos, int xvel, int yvel, Game::PType type, std::string id, int seed);
     
@@ -36,8 +36,9 @@ private:
     std::map<std::string, SDL_Texture *> textures;
     std::map<std::string, TTF_Font *> fonts;
     
-    static constexpr float pSpeed = 1.5f;
-    
-    static void CreateProjectile(Entity &projectile, Entity &player, int range, float speed, int dmg, int srcSize, float Scale, std::string id, char option, bool animated, Vector2D &vel);
+    static void ProjTransform(Entity &projectile, Entity &player, int srcSize, float scale, Vector2D &vel);
+
+    static void P_FireballTransform(Entity &projectile, Entity &player, int srcSize, float scale, Vector2D &vel,
+                                    char option, bool sideOffset);
     static void CreateEnemy(Entity &enemy, float wr, float ws, float ps, float fs, std::string id);
 };

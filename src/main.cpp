@@ -4,7 +4,6 @@
 Game *game = nullptr;
 
 int main(int argc, const char *argv[]) {
-    // insert code here...
 
     Game::path =  std::string(argv[0]);
     std::size_t found = Game::path.find_last_of("/\\");
@@ -30,6 +29,7 @@ int main(int argc, const char *argv[]) {
         game->handleEvents();
         game->update();
         game->render();
+
         frameTime = SDL_GetTicks() - frameStart;
         if (frameDelay > frameTime)
         {

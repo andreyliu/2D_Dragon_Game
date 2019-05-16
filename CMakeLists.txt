@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.13)
-project(2D_Game_Engine)
+project(BURN_THEM_ALL)
 
 set(CMAKE_CXX_STANDARD 14)
 
-include_directories(2D_Game_Engine)
-include_directories(2D_Game_Engine/ECS)
+include_directories(src)
+include_directories(src/ECS)
 include_directories(Dependencies)
 include_directories(Dependencies/sdl2)
 include_directories(Dependencies/sdl2/include)
@@ -17,35 +17,35 @@ include_directories(Dependencies/sdl2_ttf/include)
 include_directories(Dependencies/sdl2_ttf/include/SDL2)
 
 add_executable(BURN_THEM_ALL
-        2D_Game_Engine/ECS/Animation.h
-        2D_Game_Engine/ECS/ColliderComponent.h
-        2D_Game_Engine/ECS/Components.h
-        2D_Game_Engine/ECS/ECS.cpp
-        2D_Game_Engine/ECS/ECS.h
-        2D_Game_Engine/ECS/EnemyComponent.h
-        2D_Game_Engine/ECS/KeyboardController.h
-        2D_Game_Engine/ECS/ProjectileComponent.h
-        2D_Game_Engine/ECS/SpriteComponent.h
-        2D_Game_Engine/ECS/TileComponent.h
-        2D_Game_Engine/ECS/TransformComponent.h
-        2D_Game_Engine/ECS/UILabel.h
-        2D_Game_Engine/AssetManager.cpp
-        2D_Game_Engine/AssetManager.h
-        2D_Game_Engine/Collision.cpp
-        2D_Game_Engine/Collision.h
-        2D_Game_Engine/Enemies.cpp
-        2D_Game_Engine/Enemies.h
-        2D_Game_Engine/Game.cpp
-        2D_Game_Engine/Game.h
-        2D_Game_Engine/GameObject.cpp
-        2D_Game_Engine/GameObject.h
-        2D_Game_Engine/main.cpp
-        2D_Game_Engine/Map.cpp
-        2D_Game_Engine/Map.h
-        2D_Game_Engine/TextureManager.cpp
-        2D_Game_Engine/TextureManager.h
-        2D_Game_Engine/Vector2D.cpp
-        2D_Game_Engine/Vector2D.h
+        src/ECS/Animation.h
+        src/ECS/ColliderComponent.h
+        src/ECS/Components.h
+        src/ECS/ECS.cpp
+        src/ECS/ECS.h
+        src/ECS/EnemyComponent.h
+        src/ECS/KeyboardController.h
+        src/ECS/ProjectileComponent.h
+        src/ECS/SpriteComponent.h
+        src/ECS/TileComponent.h
+        src/ECS/TransformComponent.h
+        src/ECS/UILabel.h
+        src/AssetManager.cpp
+        src/AssetManager.h
+        src/Collision.cpp
+        src/Collision.h
+        src/Enemies.cpp
+        src/Enemies.h
+        src/Game.cpp
+        src/Game.h
+        src/GameObject.cpp
+        src/GameObject.h
+        src/main.cpp
+        src/Map.cpp
+        src/Map.h
+        src/TextureManager.cpp
+        src/TextureManager.h
+        src/Vector2D.cpp
+        src/Vector2D.h
         Dependencies/sdl2/include/SDL2/begin_code.h
         Dependencies/sdl2/include/SDL2/close_code.h
         Dependencies/sdl2/include/SDL2/SDL.h

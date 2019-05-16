@@ -8,8 +8,6 @@
 #include "Collision.h"
 #include "AssetManager.h"
 #include <sstream>
-//#include <vector>
-
 
 Map *map;
 Manager manager;
@@ -77,25 +75,21 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
         return;
     }
     
-    assets->AddTexture("terrain", (Game::path + "/2D_Game_Engine/assets/terrain_ss.png").c_str());
-    assets->AddTexture("player", (Game::path + "/2D_Game_Engine/assets/dragon2.1.png").c_str());
-    assets->AddTexture("projectile", (Game::path + "/2D_Game_Engine/assets/proj.png").c_str());
-    assets->AddTexture("fireball", (Game::path + "/2D_Game_Engine/assets/fireball.png").c_str());
-    assets->AddTexture("enemy", (Game::path + "/2D_Game_Engine/assets/enemy.png").c_str());
-    assets->AddTexture("flame", (Game::path + "/2D_Game_Engine/assets/flame.png").c_str());
-    
-    assets->AddFont("SLB", Game::path + "/2D_Game_Engine/assets/SuperLegendBoy.ttf", 16);
-
+    assets->AddTexture("terrain", (Game::path + "/src/assets/terrain_ss.png").c_str());
+    assets->AddTexture("player", (Game::path + "/src/assets/dragon2.1.png").c_str());
+    assets->AddTexture("projectile", (Game::path + "/src/assets/proj.png").c_str());
+    assets->AddTexture("fireball", (Game::path + "/src/assets/fireball.png").c_str());
+    assets->AddTexture("enemy", (Game::path + "/src/assets/enemy.png").c_str());
+    assets->AddTexture("flame", (Game::path + "/src/assets/flame.png").c_str());
+    assets->AddFont("SLB", Game::path + "/src/assets/SuperLegendBoy.ttf", 16);
     map = new Map("terrain", 2, 32);
     
     //ecs system
-    map->LoadMap(Game::path + "/2D_Game_Engine/assets/map.map", 25, 20);
+    map->LoadMap(Game::path + "/src/assets/map.map", 25, 20);
     std::cout << "map created" << std::endl;
 
     enemiesLoader = new Enemies();
-    
-    enemiesLoader->LoadEnemies(Game::path + "/2D_Game_Engine/assets/enemies.map", 25, 20);
-
+    enemiesLoader->LoadEnemies(Game::path + "/src/assets/enemies.map", 25, 20);
     std::cout << "enemies created" << std::endl;
     
     player.addComponent<TransformComponent>(191, 161, 0.5);
@@ -103,12 +97,10 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
-
     std::cout << "Initilized player" << std::endl;
     
     SDL_Color white = { 255, 255, 255, 255 };
     label.addComponent<UILabel>(10, 10, "Test String", "SLB", white);
-
     std::cout << "game labels created" << std::endl;
 }
 
@@ -136,12 +128,9 @@ void Game::update()
     label.getComponent<UILabel>().SetLabelText(ss.str(), "SLB");
 
     manager.refresh();
-    
-//    std::cout << player.getComponent<TransformComponent>().position << std::endl;
-    
+
     manager.update();
-//    std::cout << "velocity: " << player.getComponent<TransformComponent>().velocity << std::endl;
-//    std::cout << "player" << player.getComponent<TransformComponent>().position << std::endl;
+
     for (auto &c : colliders)
     {
         SDL_Rect cCol = c->getComponent<ColliderComponent>().collider;
@@ -155,7 +144,7 @@ void Game::update()
             }
         }
     }
-    
+
     for (auto &c : colliders)
     {
         SDL_Rect cCol = c->getComponent<ColliderComponent>().collider;
@@ -172,7 +161,6 @@ void Game::update()
             SDL_Rect c2Col = c2->getComponent<ColliderComponent>().collider;
             if (Collision::AABB(cCol, c2Col))
             {
-//                c->getComponent<TransformComponent>().position = playerPos;
                 c->getComponent<TransformComponent>().position -= c->getComponent<TransformComponent>().velocity;
                 c2->getComponent<TransformComponent>().position -= c2->getComponent<TransformComponent>().velocity;
                 
@@ -180,22 +168,18 @@ void Game::update()
 
         }
         
-            }
-//    std::cout << player.getComponent<TransformComponent>().position << std::endl;
-    
+    }
+
     for (auto &p : projectiles)
     {
         if (Collision::AABB(player.getComponent<ColliderComponent>().collider, p->getComponent<ColliderComponent>().collider))
         {
-//            std::cout << "Hit player!" << std::endl;
             p->destroy();
             health -= damage;
             score--;
         }
     }
-    
-    
-    
+
     for (auto &e : enemies)
     {
         int xpos = static_cast<int>(e->getComponent<TransformComponent>().position.x);
@@ -206,14 +190,13 @@ void Game::update()
             e->destroy();
         }
     }
-    
+
     for (auto &p : playerProj)
     {
         for (auto &e: enemies)
         {
             if (Collision::AABB(e->getComponent<ColliderComponent>().collider, p->getComponent<ColliderComponent>().collider))
             {
-//                std::cout << "Hit enemy!" << std::endl;
                 p->destroy();
                 e->destroy();
                 score++;
@@ -225,12 +208,11 @@ void Game::update()
         {
             if (Collision::AABB(ep->getComponent<ColliderComponent>().collider, p->getComponent<ColliderComponent>().collider))
             {
-//                std::cout << "Hit enemy projectile!" << std::endl;
                 ep->destroy();
             }
         }
     }
-    
+
     camera.x = static_cast<int>(player.getComponent<TransformComponent>().position.x - 300);
     camera.y = static_cast<int>(player.getComponent<TransformComponent>().position.y - 220);
     
@@ -238,7 +220,7 @@ void Game::update()
     if (camera.y < 0) camera.y = 0;
     if (camera.x > map->mapW - camera.w) camera.x = camera.w;
     if (camera.y > map->mapH - camera.h) camera.y = camera.h;
-    
+
 }
 
 template<typename T> bool Game::inView(Entity *t)
@@ -260,7 +242,6 @@ template<typename T> bool Game::inView(Entity *t)
 void Game::render()
 {
     SDL_RenderClear(renderer);
-    
     
     for (auto &t : tiles)
     {

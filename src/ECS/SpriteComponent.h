@@ -72,6 +72,7 @@ public:
         srcRect.h = transform->height;
         destRect.w = static_cast<int>(transform->width * transform->scale);
         destRect.h = static_cast<int>(transform->height * transform->scale);
+
         if (animated && ID == "player")
         {
             Animation up = Animation(0, 3, 300);
@@ -101,6 +102,11 @@ public:
         destRect.y = static_cast<int>(transform->position.y) - Game::camera.y;
         destRect.w = static_cast<int>(transform->width * transform->scale);
         destRect.h = static_cast<int>(transform->height * transform->scale);
+//        std::cout << "************************************" << std::endl;
+//        std::cout << destRect.w << std::endl;
+//        std::cout << destRect.h << std::endl;
+//        std::cout << "************************************" << std::endl;
+
     }
     
     void draw() override

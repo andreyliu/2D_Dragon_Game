@@ -16,16 +16,14 @@ public:
     const float walkSpeed;
     const float projSpeed;
     const float followSpeed;
-    const static int projRange = 200;
-    const static int sensingDist = 400; // 500
-    const static int baseDamage = 40;
     int enemyID;
+    int sensingDist;
+    int projRange;
     //initialize
     Uint32 lastAttack = 0;
-//    bool moving = false;
-    
-    EnemyComponent(float wr, float ws, float ps, float fs)
-    : walkRange(wr), walkSpeed(ws), projSpeed(ps), followSpeed(fs)
+
+    EnemyComponent(float wr, float ws, float ps, float fs, int sd, int rg)
+    : walkRange(wr), walkSpeed(ws), projSpeed(ps), followSpeed(fs), sensingDist(sd), projRange(rg)
     {}
     
     void init() override
@@ -38,6 +36,7 @@ public:
     
     void update() override
     {
+        std::cout << "enemy update start" << std::endl;
         float dist = PlayerDist();
         if (dist > sensingDist) //
         {
@@ -55,12 +54,13 @@ public:
         }
         else {
             transform->speed = followSpeed;
-            //        // TODO if there is a target, follow and shoot stuff with a delay
             std::unique_ptr<Vector2D> tempV(transform->position.TurnTo(player.getComponent<TransformComponent>().position));
             tempV->Normalize();
             transform->velocity = *tempV;
         }
+        std::cout << "enemy update -1" << std::endl;
         attack();
+        std::cout << "enemy update" << std::endl;
     }
     
     void walk()
@@ -116,14 +116,14 @@ private:
     
     int RandomVecValue()
     {
-        srand(enemyID);  // Initialize random number generator.
+        srand((Uint32) enemyID);  // Initialize random number generator.
         int r = rand() % 3;
         return r - 1;
     }
     
     int RandomBinValue()
     {
-        srand(enemyID);  // Initialize random number generator.
+        srand((Uint32) enemyID);  // Initialize random number generator.
         int r = rand() & 1;
         return (r == 0) ? -1 : 1;
     }
