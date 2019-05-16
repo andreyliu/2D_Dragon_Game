@@ -20,7 +20,7 @@ void Enemies::LoadEnemies(std::string path, int mapWidth, int mapHeight)
     int numEnemies = std::stoi(line, nullptr);
     
     file.ignore();
-    
+
     for (int i = 0; i < numEnemies; i++)
     {
         std::getline(file, line, ',');
@@ -50,7 +50,6 @@ void Enemies::LoadEnemies(std::string path, int mapWidth, int mapHeight)
         {
             file.get(c);
             num = atoi(&c);
-            std::cout << num << std::endl;
             if (num == 1)
             {
                 counter++;

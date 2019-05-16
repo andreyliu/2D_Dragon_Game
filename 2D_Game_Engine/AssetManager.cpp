@@ -1,7 +1,7 @@
 #include "AssetManager.h"
 #include "ECS/Components.h"
 #include <memory>
-#include <SDL2/SDL.h>
+#include "SDL2/SDL.h"
 
 static int fbSrcSize = 100;
 static float fbScale = 0.24;
@@ -38,7 +38,6 @@ void AssetManager::CreateProjectile(Entity &entity, Game::PType type, char optio
             projectile.getComponent<TransformComponent>().position.y += entity.getComponent<TransformComponent>().orientation.y * 50;
             break;
         case Game::enemyBasicT:
-            std::cout << entity.getComponent<TransformComponent>().velocity << std::endl;
             AssetManager::CreateProjectile(projectile, entity, EnemyComponent::projRange, pSpeed, EnemyComponent::baseDamage, eSrcSize, eScale, "projectile", option, false, entity.getComponent<TransformComponent>().velocity);
             projectile.addGroup(Game::groupProjectiles);
             break;

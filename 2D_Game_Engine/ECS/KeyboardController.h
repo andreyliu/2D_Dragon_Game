@@ -21,7 +21,7 @@ private:
         bool side = player.getComponent<TransformComponent>().orientation.x != 0;
         Uint32 tick = SDL_GetTicks();
         if (tick - lastAttack < 50) return;
-        std::cout << "ROAR ATTACK" << std::endl;
+//        std::cout << "ROAR ATTACK" << std::endl;
         lastAttack = tick;
         Game::assets->CreateProjectile(player, Game::playerFlameT, 'N', side);
     }

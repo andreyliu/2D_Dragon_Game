@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <vector>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
 
 class AssetManager;
 class ColliderComponent;
@@ -34,6 +34,7 @@ public:
     static bool isRunning;
     static SDL_Rect camera;
     static AssetManager *assets;
+    static std::string path;
     
     enum groupLabels : std::size_t
     {

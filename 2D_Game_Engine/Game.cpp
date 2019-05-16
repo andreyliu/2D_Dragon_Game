@@ -41,6 +41,8 @@ auto &colliders(manager.getGroup(Game::groupColliders));
 auto &projectiles(manager.getGroup(Game::groupProjectiles));
 auto &playerProj(manager.getGroup(Game::groupPlayerProjectiles));
 
+std::string Game::path = "";
+
 Game::Game()
 {}
 
@@ -75,35 +77,39 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
         return;
     }
     
-    assets->AddTexture("terrain", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/terrain_ss.png");
-    assets->AddTexture("player", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/dragon2.1.png");
-    assets->AddTexture("projectile", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/proj.png");
-    assets->AddTexture("fireball", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/fireball.png");
-    assets->AddTexture("enemy", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/enemy.png");
-    assets->AddTexture("flame", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/flame.png");
+    assets->AddTexture("terrain", (Game::path + "/2D_Game_Engine/assets/terrain_ss.png").c_str());
+    assets->AddTexture("player", (Game::path + "/2D_Game_Engine/assets/dragon2.1.png").c_str());
+    assets->AddTexture("projectile", (Game::path + "/2D_Game_Engine/assets/proj.png").c_str());
+    assets->AddTexture("fireball", (Game::path + "/2D_Game_Engine/assets/fireball.png").c_str());
+    assets->AddTexture("enemy", (Game::path + "/2D_Game_Engine/assets/enemy.png").c_str());
+    assets->AddTexture("flame", (Game::path + "/2D_Game_Engine/assets/flame.png").c_str());
     
-    assets->AddFont("SLB", "/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/SuperLegendBoy.ttf", 16);
-    
+    assets->AddFont("SLB", Game::path + "/2D_Game_Engine/assets/SuperLegendBoy.ttf", 16);
+
     map = new Map("terrain", 2, 32);
     
     //ecs system
-    map->LoadMap("/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/map.map", 25, 20);
+    map->LoadMap(Game::path + "/2D_Game_Engine/assets/map.map", 25, 20);
+    std::cout << "map created" << std::endl;
 
     enemiesLoader = new Enemies();
     
-    enemiesLoader->LoadEnemies("/Users/yuqiliu/Documents/Dev/2D_Game_Engine/2D_Game_Engine/assets/enemies.map", 25, 20);
+    enemiesLoader->LoadEnemies(Game::path + "/2D_Game_Engine/assets/enemies.map", 25, 20);
+
+    std::cout << "enemies created" << std::endl;
     
     player.addComponent<TransformComponent>(191, 161, 0.5);
     player.addComponent<SpriteComponent>("player", true);
-    
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
-    
-    
+
+    std::cout << "Initilized player" << std::endl;
     
     SDL_Color white = { 255, 255, 255, 255 };
     label.addComponent<UILabel>(10, 10, "Test String", "SLB", white);
+
+    std::cout << "game labels created" << std::endl;
 }
 
 void Game::handleEvents()
@@ -192,8 +198,8 @@ void Game::update()
     
     for (auto &e : enemies)
     {
-        int xpos = e->getComponent<TransformComponent>().position.x;
-        int ypos = e->getComponent<TransformComponent>().position.y;
+        int xpos = static_cast<int>(e->getComponent<TransformComponent>().position.x);
+        int ypos = static_cast<int>(e->getComponent<TransformComponent>().position.y);
         bool onMap = xpos > 0 && ypos > 0 && map->mapW > xpos && map->mapH > ypos;
         if (!onMap)
         {
@@ -219,14 +225,14 @@ void Game::update()
         {
             if (Collision::AABB(ep->getComponent<ColliderComponent>().collider, p->getComponent<ColliderComponent>().collider))
             {
-                std::cout << "Hit enemy projectile!" << std::endl;
+//                std::cout << "Hit enemy projectile!" << std::endl;
                 ep->destroy();
             }
         }
     }
     
-    camera.x = player.getComponent<TransformComponent>().position.x - 300;
-    camera.y = player.getComponent<TransformComponent>().position.y - 220;
+    camera.x = static_cast<int>(player.getComponent<TransformComponent>().position.x - 300);
+    camera.y = static_cast<int>(player.getComponent<TransformComponent>().position.y - 220);
     
     if (camera.x < 0) camera.x = 0;
     if (camera.y < 0) camera.y = 0;

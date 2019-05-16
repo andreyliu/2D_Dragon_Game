@@ -1,0 +1,128 @@
+cmake_minimum_required(VERSION 3.13)
+project(2D_Game_Engine)
+
+set(CMAKE_CXX_STANDARD 14)
+
+include_directories(2D_Game_Engine)
+include_directories(2D_Game_Engine/ECS)
+include_directories(Dependencies)
+include_directories(Dependencies/sdl2)
+include_directories(Dependencies/sdl2/include)
+include_directories(Dependencies/sdl2/include/SDL2)
+include_directories(Dependencies/sdl2_image)
+include_directories(Dependencies/sdl2_image/include)
+include_directories(Dependencies/sdl2_image/include/SDL2)
+include_directories(Dependencies/sdl2_ttf)
+include_directories(Dependencies/sdl2_ttf/include)
+include_directories(Dependencies/sdl2_ttf/include/SDL2)
+
+add_executable(BURN_THEM_ALL
+        2D_Game_Engine/ECS/Animation.h
+        2D_Game_Engine/ECS/ColliderComponent.h
+        2D_Game_Engine/ECS/Components.h
+        2D_Game_Engine/ECS/ECS.cpp
+        2D_Game_Engine/ECS/ECS.h
+        2D_Game_Engine/ECS/EnemyComponent.h
+        2D_Game_Engine/ECS/KeyboardController.h
+        2D_Game_Engine/ECS/ProjectileComponent.h
+        2D_Game_Engine/ECS/SpriteComponent.h
+        2D_Game_Engine/ECS/TileComponent.h
+        2D_Game_Engine/ECS/TransformComponent.h
+        2D_Game_Engine/ECS/UILabel.h
+        2D_Game_Engine/AssetManager.cpp
+        2D_Game_Engine/AssetManager.h
+        2D_Game_Engine/Collision.cpp
+        2D_Game_Engine/Collision.h
+        2D_Game_Engine/Enemies.cpp
+        2D_Game_Engine/Enemies.h
+        2D_Game_Engine/Game.cpp
+        2D_Game_Engine/Game.h
+        2D_Game_Engine/GameObject.cpp
+        2D_Game_Engine/GameObject.h
+        2D_Game_Engine/main.cpp
+        2D_Game_Engine/Map.cpp
+        2D_Game_Engine/Map.h
+        2D_Game_Engine/TextureManager.cpp
+        2D_Game_Engine/TextureManager.h
+        2D_Game_Engine/Vector2D.cpp
+        2D_Game_Engine/Vector2D.h
+        Dependencies/sdl2/include/SDL2/begin_code.h
+        Dependencies/sdl2/include/SDL2/close_code.h
+        Dependencies/sdl2/include/SDL2/SDL.h
+        Dependencies/sdl2/include/SDL2/SDL_assert.h
+        Dependencies/sdl2/include/SDL2/SDL_atomic.h
+        Dependencies/sdl2/include/SDL2/SDL_audio.h
+        Dependencies/sdl2/include/SDL2/SDL_bits.h
+        Dependencies/sdl2/include/SDL2/SDL_blendmode.h
+        Dependencies/sdl2/include/SDL2/SDL_clipboard.h
+        Dependencies/sdl2/include/SDL2/SDL_config.h
+        Dependencies/sdl2/include/SDL2/SDL_cpuinfo.h
+        Dependencies/sdl2/include/SDL2/SDL_egl.h
+        Dependencies/sdl2/include/SDL2/SDL_endian.h
+        Dependencies/sdl2/include/SDL2/SDL_error.h
+        Dependencies/sdl2/include/SDL2/SDL_events.h
+        Dependencies/sdl2/include/SDL2/SDL_filesystem.h
+        Dependencies/sdl2/include/SDL2/SDL_gamecontroller.h
+        Dependencies/sdl2/include/SDL2/SDL_gesture.h
+        Dependencies/sdl2/include/SDL2/SDL_haptic.h
+        Dependencies/sdl2/include/SDL2/SDL_hints.h
+        Dependencies/sdl2/include/SDL2/SDL_joystick.h
+        Dependencies/sdl2/include/SDL2/SDL_keyboard.h
+        Dependencies/sdl2/include/SDL2/SDL_keycode.h
+        Dependencies/sdl2/include/SDL2/SDL_loadso.h
+        Dependencies/sdl2/include/SDL2/SDL_log.h
+        Dependencies/sdl2/include/SDL2/SDL_main.h
+        Dependencies/sdl2/include/SDL2/SDL_messagebox.h
+        Dependencies/sdl2/include/SDL2/SDL_mouse.h
+        Dependencies/sdl2/include/SDL2/SDL_mutex.h
+        Dependencies/sdl2/include/SDL2/SDL_name.h
+        Dependencies/sdl2/include/SDL2/SDL_opengl.h
+        Dependencies/sdl2/include/SDL2/SDL_opengl_glext.h
+        Dependencies/sdl2/include/SDL2/SDL_opengles.h
+        Dependencies/sdl2/include/SDL2/SDL_opengles2.h
+        Dependencies/sdl2/include/SDL2/SDL_opengles2_gl2.h
+        Dependencies/sdl2/include/SDL2/SDL_opengles2_gl2ext.h
+        Dependencies/sdl2/include/SDL2/SDL_opengles2_gl2platform.h
+        Dependencies/sdl2/include/SDL2/SDL_opengles2_khrplatform.h
+        Dependencies/sdl2/include/SDL2/SDL_pixels.h
+        Dependencies/sdl2/include/SDL2/SDL_platform.h
+        Dependencies/sdl2/include/SDL2/SDL_power.h
+        Dependencies/sdl2/include/SDL2/SDL_quit.h
+        Dependencies/sdl2/include/SDL2/SDL_rect.h
+        Dependencies/sdl2/include/SDL2/SDL_render.h
+        Dependencies/sdl2/include/SDL2/SDL_revision.h
+        Dependencies/sdl2/include/SDL2/SDL_rwops.h
+        Dependencies/sdl2/include/SDL2/SDL_scancode.h
+        Dependencies/sdl2/include/SDL2/SDL_sensor.h
+        Dependencies/sdl2/include/SDL2/SDL_shape.h
+        Dependencies/sdl2/include/SDL2/SDL_stdinc.h
+        Dependencies/sdl2/include/SDL2/SDL_surface.h
+        Dependencies/sdl2/include/SDL2/SDL_system.h
+        Dependencies/sdl2/include/SDL2/SDL_syswm.h
+        Dependencies/sdl2/include/SDL2/SDL_test.h
+        Dependencies/sdl2/include/SDL2/SDL_test_assert.h
+        Dependencies/sdl2/include/SDL2/SDL_test_common.h
+        Dependencies/sdl2/include/SDL2/SDL_test_compare.h
+        Dependencies/sdl2/include/SDL2/SDL_test_crc32.h
+        Dependencies/sdl2/include/SDL2/SDL_test_font.h
+        Dependencies/sdl2/include/SDL2/SDL_test_fuzzer.h
+        Dependencies/sdl2/include/SDL2/SDL_test_harness.h
+        Dependencies/sdl2/include/SDL2/SDL_test_images.h
+        Dependencies/sdl2/include/SDL2/SDL_test_log.h
+        Dependencies/sdl2/include/SDL2/SDL_test_md5.h
+        Dependencies/sdl2/include/SDL2/SDL_test_memory.h
+        Dependencies/sdl2/include/SDL2/SDL_test_random.h
+        Dependencies/sdl2/include/SDL2/SDL_thread.h
+        Dependencies/sdl2/include/SDL2/SDL_timer.h
+        Dependencies/sdl2/include/SDL2/SDL_touch.h
+        Dependencies/sdl2/include/SDL2/SDL_types.h
+        Dependencies/sdl2/include/SDL2/SDL_version.h
+        Dependencies/sdl2/include/SDL2/SDL_video.h
+        Dependencies/sdl2/include/SDL2/SDL_vulkan.h
+        Dependencies/sdl2_image/include/SDL2/SDL_image.h
+        Dependencies/sdl2_ttf/include/SDL2/SDL_ttf.h)
+
+target_link_libraries(BURN_THEM_ALL ${CMAKE_SOURCE_DIR}/Dependencies/sdl2/lib/libSDL2-2.0.0.dylib)
+target_link_libraries(BURN_THEM_ALL ${CMAKE_SOURCE_DIR}/Dependencies/sdl2_image/lib/libSDL2_image-2.0.0.dylib)
+target_link_libraries(BURN_THEM_ALL ${CMAKE_SOURCE_DIR}/Dependencies/sdl2_ttf/lib/libSDL2_ttf-2.0.0.dylib)
+

@@ -36,7 +36,7 @@ public:
         distance += speed;
         if (distance > range)
         {
-            std::cout << "Out Of Range" << std::endl;
+//            std::cout << "Out Of Range" << std::endl;
             entity-> destroy();
         }
     }
