@@ -36,7 +36,6 @@ public:
     
     void update() override
     {
-        std::cout << "enemy update start" << std::endl;
         float dist = PlayerDist();
         if (dist > sensingDist) //
         {
@@ -58,9 +57,7 @@ public:
             tempV->Normalize();
             transform->velocity = *tempV;
         }
-        std::cout << "enemy update -1" << std::endl;
         attack();
-        std::cout << "enemy update" << std::endl;
     }
     
     void walk()
