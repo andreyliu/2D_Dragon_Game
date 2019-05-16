@@ -10,8 +10,8 @@ int main(int argc, const char *argv[]) {
     std::size_t found = Game::path.find_last_of("/\\");
 
     Game::path = Game::path.substr(0, found);
-    found = Game::path.find_last_of("/\\");
-    Game::path = Game::path.substr(0, found);
+//    found = Game::path.find_last_of("/\\");
+//    Game::path = Game::path.substr(0, found);
     std::cout << Game::path << std::endl;
 
     const int FPS = 60;
